@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        <!--#exec cgi="GetText?PRODUCT_LONG_NAME"-->: Monitor
+    </title>
+
+    <script src="logging_mpu.js" type="text/javascript"></script>
+    <script src="sticky_mpu.js" type="text/javascript"></script>
+    <script src="sse_mpu.js" type="text/javascript"></script>
+    <script src="utils_mpu.js" type="text/javascript"></script>
+    <script src="languages.js" type="text/javascript"></script>
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="MPU Web Interface.">
+    <meta charset="utf-8">
+    <link href="styles_mpu.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- Menu -->
+<header>
+    <div class="title-acronyme">
+        <!--#exec cgi="GetText?PRODUCT_SHORT_NAME"-->
+        <span class="title">:&nbsp;<!--#exec cgi="GetText?PRODUCT_LONG_NAME"--></span>
+        <span id="offline" class="title"></span>
+
+    </div>
+ <div class="dropdown">
+                <div class="language" id="lan"><span id="sse_lang">EN</span> &#9662;</div>
+                <div class="dropdown-content">
+                    <form action="javascript:changeLang('EN');" target="_self" method="POST">
+                        <input type="submit" name="Language" class="english" value="EN">
+                    </form>
+                    <form action="javascript:changeLang('DE');" target="_self" method="POST">
+                        <input type="submit" name="Language" class="deutsch" value="DE">
+                    </form>
+                </div>
+            </div>
+    <ul id="sticky_navbar">
+        <li>
+            <div><span class="right-border">
+                        <dummy></dummy>
+                    </span></div>
+        </li>
+        <li>
+            <div><span class="active" data-key="Monitor">Monitor</span></div>
+        </li>
+        <li>
+            <div><a class="left-border" href="setting.htm" data-key="Setting">Setting</a></div>
+        </li>
+        <li>
+            <div><a href="logging.htm" data-key="Logging">Logging</a></div>
+        </li>
+        <li>
+            <div><span>
+                        <dummy></dummy>
+                    </span></div>
+        </li>
+        <li id="sse_nav_debug" hide>
+            <div><a href="debug.htm" data-key="Debug">Debug</a></div>
+        </li>
+
+
+
+
+    </ul>
+
+    <a href="https://www.conductix.com/en">
+        <img src="logo_mpu.png" alt="Conductix-Wampfler Automation GmbH" class="logo">
+    </a>
+</header>
+
+<!-- Content -->
+<content>
+    <!-- Row 1 -->
+    <row-layout>
+        <!-- Column 1 -->
+        <col-layout>
+            <!-- Warnings -->
+            <box-layout>
+                <h2 data-key="Warning" >Warning
+                    <info></info>
+                    <info-box  data-key="index-warning-info-box">Warning are not self-resetting. Warnings can can be reset via 'Setting' tab or by
+                        Ethernet command.
+                    </info-box>
+                </h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th  data-key="Id">Id</th>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Status">Status</th>
+                    </tr>
+                    <tr>
+                        <td>W325</td>
+                        <td data-key="Heat-Sink Temperature">Heat-Sink Temperature</td>
+                        <td><span id="sse_w325" class="warning-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>W326</td>
+                        <td data-key="IM-Pad Temperature">IM-Pad Temperature</td>
+                        <td><span id="sse_w326" class="warning-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>W327</td>
+                        <td data-key="RTC Byttery Low Voltage">RTC Byttery Low Voltage</td>
+                        <td><span id="sse_w327" class="warning-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>W328</td>
+                        <td data-key="">Invalid Command</td>
+                        <td><span id="sse_w328" class="warning-passive"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+
+            <!-- Errors-->
+            <box-layout>
+                <h2>Error
+                    <info></info>
+                    <info-box data-key="index-error-warning-box">Errors are not self-resetting. Only errors with 'i' are cleard after condition
+                        disappears. All permanent
+                        errors can can be reset via 'Setting' tab or by Ethernet command.
+                    </info-box>
+                </h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Id">Id</th>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Status">Status</th>
+                    </tr>
+                    <tr>
+                        <td>F310</td>
+                        <td data-key="Power Good">Power Good <span class="highlight">HW</span></td>
+                        <td><span id="sse_f310" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F311</td>
+                        <td data-key="Over Current">Over Current <span class="highlight">HW</span></td>
+                        <td><span id="sse_f311" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F312</td>
+                        <td data-key="Over Temperature">Over Temperature <span class="highlight">HW</span></td>
+                        <td><span id="sse_f312" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F313</td>
+                        <td data-key="Fan Fault">Fan Fault <span class="highlight">HW</span> - Error</td>
+                        <td><span id="sse_f313" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F314</td>
+                        <td data-key="Heat-Sink Temperature">Heat-Sink Temperature</td>
+                        <td><span id="sse_f314" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F315</td>
+                        <td data-key=">IM-Pad Temperature">IM-Pad Temperature</td>
+                        <td><span id="sse_f315" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F316</td>
+                        <td data-key="RTC Battery Voltage">RTC Battery Voltage</td>
+                        <td><span id="sse_f316" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F317</td>
+                        <td data-key="EEPROM Read/Write">EEPROM Read/Write</td>
+                        <td><span id="sse_f317" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F318</td>
+                        <td data-key="MRAM Read/Write">MRAM Read/Write</td>
+                        <td><span id="sse_f318" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F319</td>
+                        <td data-key="Parameter">Parameter</td>
+                        <td><span id="sse_f319" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F320
+                            <info></info>
+                            <info-box  data-key="This error is self-resetting.">This error is self-resetting.</info-box>
+                        </td>
+                        <td>CAN Communication</td>
+                        <td><span id="sse_f320" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F321</td>
+                        <td data-key="Over Voltage">Over Voltage</td>
+                        <td><span id="sse_f321" class="error-passive"></span></td>
+                    </tr>
+                    <tr>
+                        <td>F322
+                            <info></info>
+                            <info-box data-key="This error is self-resetting.">This error is self-resetting.</info-box>
+                        </td>
+                        <td data-key="">Ethernet Communication</td>
+                        <td><span id="sse_f322" class="error-passive"></span></td>
+                    </tr>
+                    <tr hide>
+                        <td>F323</td>
+                        <td>-</td>
+                        <td><span id="sse_f323" class="error-passive"></span></td>
+                    </tr>
+                    <tr hide>
+                        <td>F324</td>
+                        <td>-</td>
+                        <td><span id="sse_f324" class="error-passive"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+        </col-layout>
+
+        <!-- Colomn 2 -->
+        <col-layout>
+            <!-- PLC Controller -->
+            <box-layout id="sse_plc_box" hide>
+                <h2 data-key="PLC Controller">PLC Controller
+                    <info></info>
+                    <info-box data-key="plccontroller-info-box">In 'BMS & PLC' mode from BMS requested set values can be manipulated by PLC
+                        multiplicator and offset.
+                        <br><br><span data-key="Equation">Equation:</span> <p class="equation"><span data-key="Value">Value</span><sub>MPU</sub> = Value<sub>BMS</sub> &middot;
+                            multiplicator + Offset</info-box>
+                </h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Command">Command</td>
+                    </tr>
+                    <tr>
+                        <td data-key="State">State</td>
+                        <td>
+                            <select id="sse_plc_cmd" class="enum" disabled>
+                                <option value="0">-</option>
+                                <option value="1" data-key="Stop">Stop</option>
+                                <option value="2" data-key="Enable">Enable</option>
+                            </select>
+                        </td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Set value">Set value</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Current">Current</td>
+                        <td id="sse_plc_set_i">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Voltage">Voltage</td>
+                        <td id="sse_plc_set_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Multiplicator">Multiplicator</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Current">Current</td>
+                        <td id="sse_plc_mult_i">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Voltage">Voltage</td>
+                        <td id="sse_plc_mult_v">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%"data-key="Offset">Offset</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Current">Current</td>
+                        <td id="sse_plc_off_i">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Voltage">Voltage</td>
+                        <td id="sse_plc_off_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+
+            <!-- Battery Management System -->
+            <box-layout id="sse_bms_box" hide>
+                <h2 data-key="BMS: Battery Management System">BMS: Battery Management System</h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Command">Command</td>
+                    </tr>
+                    <tr>
+                        <td data-key="State">State</td>
+                        <td>
+                            <select id="sse_bms_cmd" class="enum" disabled>
+                                <option value="0">-</option>
+                                <option value="1" data-key="Stop">Stop</option>
+                                <option value="2" data-key="Release">Release</option>
+                            </select>
+                        </td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Set value">Set value</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Charging current">Charging current</td>
+                        <td id="sse_bms_set_i">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Charging voltage">Charging voltage</td>
+                        <td id="sse_bms_set_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="State">State</td>
+                    </tr>
+                    <tr>
+                        <td data-key="SOC: state of charge">SOC: state of charge</td>
+                        <td id="sse_bms_soc">-</td>
+                        <td class="unit">%</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Battery voltage">Battery voltage</td>
+                        <td id="sse_bms_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    <tr>
+                        <td data-key=">Battery voltage">Battery current</td>
+                        <td id="sse_bms_i">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Cell temperature">Cell temperature</td>
+                        <td id="sse_bms_temp">-</td>
+                        <td class="unit">&deg;C</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+
+            <!-- Power Management -->
+            <box-layout>
+                <h2 data-key="Power Management">Power Management</h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Descripton">Descripton</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+
+                    <tr>
+                        <td colspan="100%" data-key="Mode">Mode</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Charging mode">Charging mode</td>
+                        <td>
+                            <select id="sse_charging_mode" class="enum" disabled>
+                                <option value="0">-</option>
+                                <option value="1" data-key="Manual">Manual</option>
+                                <option value="2" data-key="BMS only">BMS only</option>
+                                <option value="3" data-key="BMS & PLC">BMS & PLC</option>
+                                <option value="4" data-key="PLC only">PLC only</option>
+                            </select>
+                        </td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="BMS type">BMS type</td>
+                        <td>
+                            <select id="sse_bms_type" class="enum" disabled>
+                                <option value="0">-</option>
+                                <option value="1" data-key="Can">Can</option>
+                                <option value="2" data-key="Can Open">Can Open</option>
+                            </select>
+                        </td>
+                        <td class="unit">-</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="100%" data-key="Set value<">Set value</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Current">Current</td>
+                        <td id="sse_batt_i_set">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Voltage">Voltage</td>
+                        <td id="sse_batt_v_set">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Power">Power
+                            <info></info>
+                            <info-box  data-key="index-power-info-box">The set value is an internal value calculated from
+                                voltage and current. The output is limited to 3kW and therefore
+                                the set value may not correspond to the output value. The reason for the
+                                reduction is given with the value 'Derating reason'.
+                            </info-box>
+                        </td>
+                        <td id="sse_batt_p_set">-</td>
+                        <td class="unit">kW</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Output">Output</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Current">Current</td>
+                        <td id="sse_batt_i_out">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Derating reason">Derating reason</td>
+                        <td>
+                            <select id="sse_batt_derating_reason" class="enum" disabled>
+                                <option value="-1">-</option>
+                                <option value="0" data-key="None">None</option>
+                                <option value="1" data-key="Set value limit">Set value limit</option>
+                                <option value="2" data-key="Start phase">Start phase</option>
+                                <option value="3" data-key="End of charge voltage<">End of charge voltage</option>
+                                <option value="4" data-key="IM-Pad temperature">IM-Pad temperature</option>
+                                <option value="5" data-key="Head-Sink temperature">Head-Sink temperature</option>
+                                <option value="6" data-key="Power">Power</option>
+                                <option value="7" data-key="Error">Error</option>
+                                <option value="8" data-key="Disable">Disable</option>
+                            </select>
+                        </td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Power transfer">Power transfer</td>
+                        <td>
+                            <select id="sse_ips_power_enable" class="enum" disabled>
+                                <option value="-1">-</option>
+                                <option value="0" data-key="Disabled">Disabled</option>
+                                <option value="1" data-key="Active">Active</option>
+                            </select>
+                        </td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="PWM duty">PWM duty</td>
+                        <td id="sse_ips_duty">-</td>
+                        <td class="unit">%</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Fan">Fan</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Duty">Duty</td>
+                        <td id="sse_fan_duty">-</td>
+                        <td class="unit">%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+
+            <!-- Measurement -->
+            <box-layout>
+                <h2 data-key="Measurement">Measurement</h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Descripton">Descripton</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Battery">Battery</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Current">Current</td>
+                        <td id="sse_batt_i">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Voltage">Voltage</td>
+                        <td id="sse_batt_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Power">Power</td>
+                        <td id="sse_batt_p">-</td>
+                        <td class="unit">kW</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="DC-Link">DC-Link</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Voltage">Voltage</td>
+                        <td id="sse_dclink_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Temperature">Temperature</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Heat-Sink">Heat-Sink</td>
+                        <td id="sse_hs_temp">-</td>
+                        <td class="unit">&deg;C</td>
+                    </tr>
+                    <tr>
+                        <td data-key="">IM-Pad</td>
+                        <td id="sse_coil_temp">-</td>
+                        <td class="unit">&deg;C</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Frequency">Frequency</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Rectifier pahse U">Rectifier pahse U</td>
+                        <td id="sse_rect_freq_u">-</td>
+                        <td class="unit">kHz</td>
+                    </tr>
+                    <tr>
+                        <td data-key="">Rectifier phase W</td>
+                        <td id="sse_rect_freq_w">-</td>
+                        <td class="unit">kHz</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" data-key="Misc">Misc</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Fan voltage">Fan voltage</td>
+                        <td id="sse_fan_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    <tr>
+                        <td data-key="RTC battery voltage">RTC battery voltage</td>
+                        <td id="sse_rtc_v">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+        </col-layout>
+
+        <!-- Colomn 3 -->
+        <col-layout>
+            <!-- Real Time Clock -->
+            <box-layout>
+                <h2 data-key="RTC: Real Time Clock">RTC: Real Time Clock</h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <th hide></th>
+                    <tr>
+                        <td ><span data-key="Year">Year</span> <span class="highlight">:</span> <span id="sse_rtc_year">-</span></td>
+                        <td><span data-key="Month">Month</span> <span class="highlight">:</span> <span id="sse_rtc_month">-</span></td>
+                        <td><span data-key="Day">Day</span> <span class="highlight">:</span> <span id="sse_rtc_day">-</span></td>
+                        <td><span data-key="Hour">Hour</span> <span class="highlight">:</span> <span id="sse_rtc_hour">-</span></td>
+                        <td><span data-key="Min">Min</span> <span class="highlight">:</span> <span id="sse_rtc_min">-</span></td>
+                        <td><span data-key="Sec">Sec</span> <span class="highlight">:</span> <span id="sse_rtc_sec">-</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+
+            <!-- LEDs -->
+            <box-layout>
+                <h2 data-key="LED">LED
+                    <info hide></info>
+                    <info-box data-key="TODO: I am shown when someone hovers over the div above.">TODO: I am shown when someone hovers over the div above.</info-box>
+                </h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tr>
+                        <th data-key="Name">Name</th>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Status">Status</th>
+                    </tr>
+                    <tr id="sse_led_can">
+                        <td data-key="CAN Status">CAN Status</td>
+                        <td>
+                            <p class="led-text" data-key="CAN bus deactivated.">CAN bus deactivated.</p>
+                            <p class="led-text left-on" hide data-key="Can bus fault.">Can bus fault.</p>
+                            <p class="led-text left-blink" hide data-key="CAN bus recessive.">CAN bus recessive.</p>
+                            <p class="led-text right-on" hide data-key="Receiving data">Receiving data.</p>
+                            <p class="led-text right-blink" hide data-key="Sending data.">Sending data.</p>
+                        </td>
+                        <td>
+                            <led-border class="left-red right-green">
+                                <led></led>
+                            </led-border>
+                        </td>
+                    </tr>
+                    <tr id="sse_led_stat1">
+                        <td data-key="Status">Status 1</td>
+                        <td>
+                            <p class="led-text"data-key="No charging process.">No charging process.</p>
+                            <p class="led-text left-on" hide data-key="Fully charged.">Fully charged.</p>
+                            <p class="led-text left-blink" hide data-key="Charging process active.">Charging process active.</p>
+                            <p class="led-text right-on" hide data-key="Module is ready for operation. Charging is not">Module is ready for operation. Charging is not
+                                requested.</p>
+                            <p class="led-text right-blink" hide data-key="Charging is requested. Target value is sent to IPS.">Charging is requested. Target value is sent to IPS.
+                            </p>
+                        </td>
+                        <td>
+                            <led-border class="left-orange right-green">
+                                <led></led>
+                            </led-border>
+                        </td>
+                    </tr>
+                    <tr id="sse_led_stat2">
+                        <td data-key="Status">Status 2</td>
+                        <td>
+                            <p class="led-text" data-key="No warnings or faults.">No warnings or faults.</p>
+                            <p class="led-text left-on" hide data-key="Fault in operation">Fault in operation.</p>
+                            <p class="led-text left-blink" hide data-key="Fault without charging request.">Fault without charging request.</p>
+                            <p class="led-text right-on" hide data-key="Warning in operation.">Warning in operation.</p>
+                            <p class="led-text right-blink" hide data-key="Warning without charging request.">Warning without charging request.</p>
+                        </td>
+                        <td>
+                            <led-border class="left-red right-yellow">
+                                <led></led>
+                            </led-border>
+                        </td>
+                    </tr>
+                </table>
+            </box-layout>
+
+            <!-- Software Information -->
+            <box-layout>
+                <h2 data-key="Software Information">Software Information</h2>
+
+                <!----------------------->
+                <h3 data-key="Bootloader">Bootloader</h3>
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value &nbsp;</th>
+                    </tr>
+                    <tr>
+                        <td data-key="Version">Version</td>
+                        <td id="sse_bl_version">
+                            <!--#exec cgi="GetText?BOOTLOADER_BV"-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-key="Build Date Time">Build Date &amp; Time</td>
+                        <td id="sse_bl_date_time">
+                            <!--#exec cgi="GetText?BOOTLOADER_DATE"-->&nbsp;
+                            <!--#exec cgi="GetText?BOOTLOADER_TIME"-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!----------------------->
+                <h3 data-key="Firmware">Firmware</h3>
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value &nbsp;</th>
+                    </tr>
+                    <tr>
+                        <td data-key="Version">Version</td>
+                        <td id="sse_fw_version">
+                            <!--#exec cgi="GetText?FIRMWARE_BV"-->
+           </td>
+                    </tr>
+                    <tr>
+                        <td data-key="Build Date Time">Build Date &amp; Time</td>
+                        <td id="sse_fw_date_time">
+                            <!--#exec cgi="GetText?FIRMWARE_DATE"-->&nbsp;
+                            <!--#exec cgi="GetText?FIRMWARE_TIME"-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
+        </col-layout>
+    </row-layout>
+</content>
+
+<!-- Footer -->
+<footer>
+    <row>
+        <p class="copyright">
+            &copy;&nbsp;2022&nbsp;<a class="link" href="https://www.conductix.com/en">Conductix-Wampfler Automation
+            GmbH</a>
+        </p>
+    </row>
+</footer>
+</body>
+
+</html>

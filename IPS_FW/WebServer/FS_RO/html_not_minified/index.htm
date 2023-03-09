@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inductive-Power-Supply</title>
+    <script src="Chartmin.js"></script>
+    <script src="utils.js"></script>
+    <script src="Tempcharts.js"></script>
+    <script src="Picharts.js"></script>
+
+    <link href="Styles.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta charset="utf-8">
+</head>
+
+<body style="display: none;">
+<header>
+    <div class="row">
+        <div class="column">
+            <div class="title" data-key="Inductive-Power-Supply">Inductive-Power-Supply</div>
+        </div>
+        <div class="column">
+            <a href="https://www.conductix.de/de">
+                <img src="CXS_Logo.png" alt="CXS logo" class="logo">
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="content">
+    <div id="navbar" class="navigation">
+        <div class="btn-group">
+            <button id="Index" class="active-tab" data-key="Monitor">Monitor</button>
+            <a href="Settings.htm" id="Settings-href">
+                <button id="Settings"  data-key="Settings">Settings</button>
+            </a>
+            <a href="Logs.htm">
+                <button id="Logs" data-key="Logging">Logging</button>
+            </a>
+
+            <div class="dropdown">
+                <div class="language" id="lan"><span id="lang-text">EN</span> &#9662;</div>
+                <div class="dropdown-content">
+                    <form action="javascript:changeLang('EN');" target="_self" method="POST">
+                        <input type="submit" name="Language" class="english" value="EN">
+                    </form>
+                    <form action="javascript:changeLang('DE');" target="_self" method="POST">
+                        <input type="submit" name="Language" class="deutsch" value="DE">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-layout">
+        <div class="column-layout">
+            <!-- IPS POWER TRANSFER RELATED PARAMETERS -->
+            <div class="column-div">
+                <h2 data-key="Power Transfer Parameters">Power Transfer Parameters</h2>
+                <table class="bms">
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="OUTPUT VOLTAGE">OUTPUT VOLTAGE</td>
+                        <td id="v-out" class="value">0</td>
+                        <td class="unit">&nbsp;V</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="OUTPUT CURRENT">OUTPUT CURRENT</td>
+                        <td id="i-out" class="value">0</td>
+                        <td class="unit">&nbsp;A</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="">OUTPUT POWER</td>
+                        <td id="p-out" class="value">0</td>
+                        <td class="unit">&nbsp;VA</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="DC-LINK VOLTAGE">DC-LINK VOLTAGE</td>
+                        <td id="inv-dc-link-v" class="value">0</td>
+                        <td class="unit">&nbsp;V</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="MAINS CURRENT">MAINS CURRENT</td>
+                        <td id="rectified-mains-v" class="value">0</td>
+                        <td class="unit">&nbsp;A</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="MAINS VOLTAGE RMS">MAINS VOLTAGE RMS</td>
+                        <td id="mains-v-trms" class="value">0</td>
+                        <td class="unit">&nbsp;V</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="MAINS VOLTAGE FREQUENCY">MAINS VOLTAGE FREQUENCY</td>
+                        <td id="mains-v-freq" class="value">0</td>
+                        <td class="unit">&nbsp;Hz</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- IPS TEMPERATURES -->
+            <div class="column-div">
+                <h2 data-key="IPS Temperatures">IPS Temperatures</h2>
+                <table class="bms">
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="HEAT-SINK TEMPERATURE">HEAT-SINK TEMPERATURE</td>
+                        <td id="heat-sink-t">0</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="HEAT-SINK MAX TEMPERATURE">HEAT-SINK MAX TEMPERATURE</td>
+                        <td id="heat-sink-t-max">0</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="IS-PAD TEMPERATURE">IS-PAD TEMPERATURE</td>
+                        <td id="coil-t">0</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="IS-PAD MAX TEMPERATURE">IS-PAD MAX TEMPERATURE</td>
+                        <td id="coil-t-max">0</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- FIRMWARE INFORMATION -->
+            <div class="column-div">
+                <h2 data-key="Firmware Information">Firmware Information</h2>
+                <h3 class="monitor" data-key="Master CPU">Master CPU</h3>
+                <table class="bms">
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value</th>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="APPLICATION VERSION">APPLICATION VERSION</td>
+                        <td id="cpu-app">0</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="APPLICATION BUILD DATE & TIME">APPLICATION BUILD DATE & TIME</td>
+                        <td id="app-date-time">0</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="BOOTLOADER VERSION">BOOTLOADER VERSION</td>
+                        <td id="cpu-bl">0</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="">BOOTLOADER BUILD DATE & TIME</td>
+                        <td id="bl-date-time">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3 class="monitor" data-key="Inverter DSP">Inverter DSP</h3>
+                <table class="bms">
+                    <tbody>
+                    <tr>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Value">Value</th>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="APPLICATION VERSION">APPLICATION VERSION</td>
+                        <td id="dsp-app">0</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="APPLICATION BUILD DATE & TIME">APPLICATION BUILD DATE & TIME</td>
+                        <td id="dsp-date-time">0</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="BOOTLOADER VERSION">BOOTLOADER VERSION</td>
+                        <td id="dsp-bl">0</td>
+                    </tr>
+                    <tr>
+                        <td class="description" data-key="BOOTLOADER BUILD DATE & TIME">BOOTLOADER BUILD DATE & TIME</td>
+                        <td id="dsp-bl-date-time">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="column-layout">
+
+            <!-- STATUS LEDS -->
+            <div class="column-div" id="leds-box">
+                <h2 data-key="Status LEDs">Status LEDs</h2>
+                <div id="status-leds">
+                    <div class="information">
+                        <span id="i"> &nbsp; &#8505; &nbsp;</span>
+                    </div>
+                    <div class="hidden-info" data-key="I am shown when someone hovers over the div above.">I am shown when someone hovers over the div above.</div>
+                    <div id="mpu-leds" class="leds">
+                        <span id="r-led" class="red-led-off"></span>
+                        <span id="g-led" class="green-led-off"></span>
+                        <span id="b-led" class="blue-led-off"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RTC REAL TIME CLOCK -->
+            <div class="column-div" id="rtc-box">
+                <h2 data-key="">Real Time Clock RTC</h2>
+                <table class="rtc-table">
+                    <tbody>
+                    <tr>
+                        <th><span data-key="Year">Year</span>: <span id="year"></span></th>
+                        <th><span data-key="Month">Month</span>: <span id="month"></span></th>
+                        <th><span data-key="Day">Day</span>: <span id="day"></span></th>
+                        <th><span data-key="Hour">Hour</span>: <span id="hour"></span></th>
+                        <th><span data-key="Min">Min</span>: <span id="min"></span></th>
+                        <th><span data-key="Sec">Sec</span>: <span id="sec"></span></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- IPS CHARTS -->
+            <div class="column-div">
+                <h2 data-key="Charts">Charts</h2>
+                <div id="chart-box">
+                    <h3 class="monitor" data-key="Heat-Sink & IS-Pad Temperature">Heat-Sink & IS-Pad Temperature</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <canvas id="canvas-temp"></canvas>
+                        </div>
+                    </div>
+                    <h3 class="monitor" data-key="Charging Power & Current">Charging Power & Current</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <canvas id="canvas-p-i"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="column-layout">
+
+            <!-- WARNINGS IPS STATUS -->
+            <div class="column-div" id="status-box">
+                <h2 data-key="IPS Warnings">IPS Warnings</h2>
+                <table class="mpu-warnings" id="warn-table">
+                    <tbody>
+                    <tr>
+                        <th data-key="Warning Id">Warning Id</th>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Status">Status</th>
+                    </tr>
+                    <tr>
+                        <td class="warning-id">W225</td>
+                        <td class="warning-description" data-key="HEAT-SINK TEMPERATURE WARN">HEAT-SINK TEMPERATURE WARN</td>
+                        <td class="warning-status"><span class="no-warning-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="warning-id">W226</td>
+                        <td class="warning-description" data-key="IS PAD TEMPERATURE WARN">IS PAD TEMPERATURE WARN</td>
+                        <td class="warning-status"><span class="no-warning-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="warning-id">W227</td>
+                        <td class="warning-description" data-key="RTC BATTERY LOW VOLTAGE WARN">RTC BATTERY LOW VOLTAGE WARN</td>
+                        <td class="warning-status"><span class="no-warning-square"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- ERRORS IPS STATUS-->
+                <h2 data-key="">IPS Errors</h2>
+                <h3 class="monitor" data-key="Master CPU">Master CPU</h3>
+                <table class="mpu-errors" id="cpu-err-table">
+                    <tbody>
+                    <tr>
+                        <th data-key="Error Id">Error Id</th>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Status">Status</th>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F110</td>
+                        <td class="error-description" data-key="INVALID CONFIGURATION">INVALID CONFIGURATION</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F111</td>
+                        <td class="error-description" data-key="INVERTER OFFLINE">INVERTER OFFLINE</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F113</td>
+                        <td class="error-description" data-key="INVERTER INVALID CONFIGURATION">INVERTER INVALID CONFIGURATION</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F120</td>
+                        <td class="error-description" data-key="24 VOLT SAFETY SIGNAL ERR">24 VOLT SAFETY SIGNAL ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F121</td>
+                        <td class="error-description" data-key="INVERTER START ACK">INVERTER START ACK</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="monitor" data-key="Inverter DSP">Inverter DSP</h3>
+                <table class="mpu-errors" id="inv-err-table">
+                    <tbody>
+                    <tr>
+                        <th data-key="Error Id">Error Id</th>
+                        <th data-key="Description">Description</th>
+                        <th data-key="Status">Status</th>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F210</td>
+                        <td class="error-description" data-key="OVER CURRENT ERR">OVER CURRENT ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F211</td>
+                        <td class="error-description" data-key="INVERTER SHORT CIRCUIT ERR">INVERTER SHORT CIRCUIT ERR</td>
+                        <td class=" error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F212</td>
+                        <td class="error-description" data-key="GATE DRIVER READY ERR">GATE DRIVER READY ERR</td>
+                        <td class=" error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F213</td>
+                        <td class="error-description" data-key="HARDWARE RELEASE ERR">HARDWARE RELEASE ERR</td>
+                        <td class=" error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F214</td>
+                        <td class="error-description" data-key="MAINS VOLTAGE ERR">MAINS VOLTAGE ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F215</td>
+                        <td class="error-description" data-key="CHARGING RESISTOR VOLTAGE RELAY ERR">CHARGING RESISTOR VOLTAGE RELAY ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F216</td>
+                        <td class="error-description" data-key="CHARGING RESISTOR VOLTAGE PFC ERR">CHARGING RESISTOR VOLTAGE PFC ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F217</td>
+                        <td class="error-description" data-key="PARAMETER DOES NOT EXIST">PARAMETER DOES NOT EXIST</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F218</td>
+                        <td class="error-description" data-key="PARAMETER VALUE OUT OF RANGE">PARAMETER VALUE OUT OF RANGE</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F219</td>
+                        <td class="error-description" data-key="PARAMETER READ ONLY">PARAMETER READ ONLY</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F222</td>
+                        <td class="error-description" data-key="MINIMUM DC-LINK VOLTAGE ERR">MINIMUM DC-LINK VOLTAGE ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F223</td>
+                        <td class="error-description" data-key="MAINS FREQUENCY RANGE ERR">MAINS FREQUENCY RANGE ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F224</td>
+                        <td class="error-description" data-key="OUTPUT CHARGING PUMP ERR">OUTPUT CHARGING PUMP ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F225</td>
+                        <td class="error-description" data-key="IS-PAD OVER TEMPERATURE ERR">IS-PAD OVER TEMPERATURE ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F226</td>
+                        <td class="error-description" data-key="HEAT-SINK OVER TEMPERATURE ERR">HEAT-SINK OVER TEMPERATURE ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="error-id">F227</td>
+                        <td class="error-description" data-key="OVER VOLTAGE ERR">OVER VOLTAGE ERR</td>
+                        <td class="error-status"><span class="no-err-square"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-layout">
+        <footer>
+            <div class="copyright">
+                <p>&copy; 2021 <a id="cxs-link" href="https://www.conductix.de/de">CONDUCTIX WAMPFLER</a></p>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="languages.js" type="text/javascript"></script>
+<script src="Monitor_js.js" type="text/javascript">
+</script>
+
+</body>
+
+</html>
