@@ -102,11 +102,7 @@ function init()
 
 function download()
 {
-    if (null == logger?.target)
-    {
-        console.log("Downloading not possible.");
-        return;
-    }
+
 
     const e = new Date();
     const t = document.createElement("a");

@@ -53,141 +53,6 @@
         <div class="row-layout">
             
             <div class="column-layout" id="left-layout-col">
-<!-- IPS SYSTEM DATA-->
-                <div class="column-div" id="ips-live-sys-data-box">
-                    <h2 data-key="IPS System Data">IPS System Data</h2>
-                    <div class="live-data-container" id="diag-params">
-                        <h3 data-key="Diagnostics">Diagnostics</h3>
-                        <table class="ips-sys-data-table">
-                            <tbody>
-                                <tr>
-                                    <td data-key="Output Voltage">Output Voltage</td>
-                                    <td id="out-voltage">0 mV</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Output Current</td>
-                                    <td id="out-current">0 mA</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Output Power </td>
-                                    <td id="out-power">0 VA</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">IS-Pad Temperature</td>
-                                    <td id="pad-tempr">0 &#176;C</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Heat-Sink Temperature</td>
-                                    <td id="hs-tempr">0 &#176;C</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Inverter PWM Signals Duty-Cycle</td>
-                                    <td id="inv-duty">0 %</td>
-                                </tr>
-                                <tr>
-                                    <td ><span data-key="AGV">AGV</span> <span class="delta">/</span> <span data-key="MPU Feedback Signal Duty-Cycle">MPU Feedback Signal Duty-Cycle</span></td>
-                                    <td id="feedback-sig">0 %</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="Inverter Branch A, HIGH SIDE Frequency">Inverter Branch A, HIGH SIDE Frequency</td>
-                                    <td id="a-freq-hs">0 Hz</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="Inverter Branch A, LOW SIDE Frequency">Inverter Branch A, LOW SIDE Frequency</td>
-                                    <td id="a-freq-ls">0 Hz</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="Inverter Branch B, HIGH SIDE Frequency">Inverter Branch B, HIGH SIDE Frequency</td>
-                                    <td id="b-freq-hs">0 Hz</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Inverter Branch B, LOW SIDE Frequency</td>
-                                    <td id="b-freq-ls">0 Hz</td>
-                                </tr>
-                                <tr>
-                                    <td><span data-key="DC-Link V set Value">DC-Link V set Value</span> <span class="delta">{</span>0%<span class="delta">=</span>300V <span class="delta">;</span> 100%<span class="delta">=</span>437V<span class="delta">}</span></td>
-                                    <td id="dc-link-duty">0 %</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="Driver Supply Clock Frequency">Driver Supply Clock Frequency</td>
-                                    <td id="driver-clk">0 Hz</td>
-                                </tr>
-                                <tr>
-                                    <td>Charging Pump Output</td>
-                                    <td id="pump">0 Hz</td>
-                                </tr>
-                                <tr>
-                                    <td><span data-key="Mains Voltage at Rectifier">Mains Voltage at Rectifier</span><span class="delta">:</span> N - DC-Link</td>
-                                    <td id="mains-rect-n">0 V</td>
-                                </tr>
-                                <tr>
-                                    <td> <span data-key="Mains Voltage at Rectifier">Mains Voltage at Rectifier</span> <span class="delta">:</span> L - DC-Link</td>
-                                    <td id="mains-rect-l">0 V</td>
-                                </tr>
-                                <tr>
-                                    <td><span data-key="Mains Voltage before Resistor">Mains Voltage before Resistor</span> <span class="delta">:</span> L - DC-Link</td>
-                                    <td id="mains-r-l">0 V</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="Mains Frequency">Mains Frequency</td>
-                                    <td id="mains-freq">0 Hz</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="DC-Link Voltage">DC-Link Voltage</td>
-                                    <td id="dc-link-v">0 V</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="live-data-container" id="debug-params">
-                        <h3 data-key="Debug">Debug</h3>
-                        <table class="ips-sys-data-table">
-                            <tbody>
-                                <tr>
-                                    <td data-key="Debug 0 Parameter">Debug 0 Parameter</td>
-                                    <td id="debug-0">0</td>
-                                </tr>
-                                <tr>
-                                    <td  data-key="Debug 1 Parameter">Debug 1 Parameter</td>
-                                    <td id="debug-1">0</td>
-                                </tr>
-                                <tr>
-                                    <td  data-key="Debug 2 Parameter">Debug 2 Parameter</td>
-                                    <td id="debug-2">0</td>
-                                </tr>
-                                <tr>
-                                    <td  data-key="Debug 3 Parameter">Debug 3 Parameter</td>
-                                    <td id="debug-3">0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="live-data-container" id="errors">
-                        <h3 data-key="Errors">Errors</h3>
-                        <table class="ips-sys-data-table">
-                            <tbody>
-                                <tr>
-                                    <td  data-key="Error Group 0">Error Group 0</td>
-                                    <td id="err-group-0">0x000000</td>
-                                </tr>
-                                <tr>
-                                    <td  data-key="Error Group 1">Error Group 1</td>
-                                    <td id="err-group-1">0x000000</td>
-                                </tr>
-                                <tr>
-                                    <td  data-key="Error Group 2">Error Group 2</td>
-                                    <td id="err-group-2">0x000000</td>
-                                </tr>
-                                <tr>
-                                    <td  data-key="Error Group 3">Error Group 3</td>
-                                    <td id="err-group-3">0x000000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="more-distance"></div>
-                </div>
 
 <!-- IPS USER MANAGEMENT-->
                 <div class="column-div" id="user-box">
@@ -239,126 +104,145 @@
                     </div>
                     <div class="more-distance"></div>
                 </div>
-                
-<!-- IPS IO TEST -->
-                <div class="column-div" id="ips-ios">
-                    <h2 data-key="IPS External I/O's">IPS External I/O's</h2>
-                    <div class="io-test-div">
-                        <h3 data-key="Input State">Input State</h3>
-                        <div style="margin: 0px 0px 13px 10px;">
-                            <div class="information">
-                                <span id="i"> &nbsp; &#8505; &nbsp;</span>
-                            </div>
-                            <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-                        </div>
-                        <span id="in-1" class="input-io-off box-dist"></span>&nbsp; IN 1 &nbsp;&nbsp;&nbsp;&nbsp;
-                        <span id="in-2" class="input-io-off box-dist"></span>&nbsp; IN 2 &nbsp;
+<!-- IPS CONFIG FILE-->
+                <div class="column-div" id="config-file-box">
+                    <h2 data-key="IPS Configuration File">IPS Configuration File</h2>
+                    <div id="cfg-up-download">
                     </div>
-                    <form class="io-test-form" action="" method="POST">
-                        <h3 data-key="Set / Clear Output">Set / Clear Output</h3>
-                        <div style="margin: 0px 0px 13px 10px;">
+                    <dialog class="alert-dialog" id="cfg_upload_dialog">
+                        <div class="warning">
+                            <span id="w"> &#9888; </span>
+                            <p id="offset-text" data-key="A new IPS configuration will be uploaded.">A new IPS configuration will be uploaded.</p>
+                            <p id="offset-text" data-key="The IPS parameters will be updated to the new configuration values!">The IPS parameters will be updated to the new configuration values!</p>
+                            <div class="more-distance"></div>
+                        </div>
+                        <form id="cfg-upload-diag"  action="" method="POST">
+                            <button class="submit-button_right" value="Abort" type="submit" onclick="close_cfg_upload_dialog_no();" data-key="Abort">Abort</button>
+                            <button class="submit-button_right" value="OK" type="button" onclick="close_cfg_upload_dialog_ok();" data-key="OK">OK</button>
+                        </form>
+                    </dialog>
+                    <dialog class="alert-dialog" id="cfg_upload_finished_dialog">
+                        <div class="info">
+                            <span id="info">&nbsp;&#8505;</span>
+                            <p id="offset-text" data-key="Finished uploading new IPS configuration file.">Finished uploading new IPS configuration file.</p>
+                            <p id="offset-text" data-key="A system reset will be performed now!.">A system reset will be performed now!.</p>
+                            <div class="more-distance"></div>
+                        </div>
+                        <form id="cfg-upload-finished-diag"  action="" method="POST">
+                            <button class="submit-button_right" name="updateCfg" value="Close" type="submit" onclick="close_cfg_upload_finished_dialog();" data-key="Close">Close</button>
+                        </form>
+                    </dialog>
+                    <dialog class="alert-dialog" id="not_ips_cfg_file_dialog">
+                        <div class="error">
+                            <span id="x-1">&#x2716;</span>
+                            <p id="offset-text" data-key="The chosen file is not an IPS configuration file!">The chosen file is not an IPS configuration file!</p>
+                            <p id="offset-text" data-key="Please choose the right file.">Please choose the right file.</p>
+                            <div class="more-distance"></div>
+                        </div>
+                        <form id="no-ips-cfg-file-diag"  action="" method="POST">
+                            <button class="submit-button_right" value="Close" type="submit" onclick="close_not_ips_cfg_file_dialog();" data-key="Close" >Close</button>
+                        </form>
+                    </dialog>
+                    <dialog class="alert-dialog" id="no_cfg_file_dialog">
+                        <div class="error">
+                            <span id="x-1">&#x2716;</span>
+                            <p id="offset-text" data-key="No IPS config .json file is selected!">No IPS config .json file is selected!</p>
+                            <p id="offset-text" data-key="Please select a valid IPS config .json file.">Please select a valid IPS config .json file.</p>
+                            <div class="more-distance"></div>
+                        </div>
+                        <button class="dialog-button" onclick="close_no_cfg_file_dialog()" data-key="Close">Close</button>
+                    </dialog>
+                    <dialog class="alert-dialog" id="no_json_format_dialog">
+                        <div class="error">
+                            <span id="x-1">&#x2716;</span>
+                            <p id="offset-text" data-key="Not a valid .json file or some data are corrupted!">Not a valid .json file or some data are corrupted!</p>
+                            <p id="offset-text" data-key="Please select a valid JSON formatted .json file.">Please select a valid JSON formatted .json file.</p>
+                            <div class="more-distance"></div>
+                        </div>
+                        <button class="dialog-button" onclick="close_no_json_format_dialog()" data-key="Close">Close</button>
+                    </dialog>
+                    <form class="config-form" action="" method="POST" onsubmit="return false">
+                        <p>
                             <div class="information">
                                 <span id="i"> &nbsp; &#8505; &nbsp;</span>
                             </div>
                             <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-                        </div>
-                        <input class="box-dist" type="checkbox" name="Set24Volt" <!--#exec cgi="Set24Volt"-->>OUT 24 V
-                        <input class="box-dist" type="checkbox" name="OUT1" <!--#exec cgi="OUT1"-->>OUT 1 &nbsp;
-                        <input class="box-dist" type="checkbox" name="OUT2" <!--#exec cgi="OUT2"-->>OUT 2 &nbsp;
-                        <input class="box-dist" type="checkbox" name="OUT3" <!--#exec cgi="OUT3"-->>OUT 3 &nbsp;
-                        <input class="box-dist" type="checkbox" name="OUT4" <!--#exec cgi="OUT4"-->>OUT 4 &nbsp;
-                        <input class="box-dist" type="checkbox" name="OUT5" <!--#exec cgi="OUT5"-->>OUT 5 &nbsp; 
-                        <input class="submit-button_right" type="submit" value="Set/Clear" name = "SetOutput">
+                        </p>
+                        <span class="config-param-form-text" data-key="Download IPS configuration file"> Download IPS configuration file <span class="beta">:</span></span>
+                        <button class="submit-button_right" type="submit" value="Download" onclick="downloadCfgFile()" data-key="Download">Download</button>
                     </form>
+                    <form class="cfg-upload-form"  action="" method="POST">
+                        <input name="cfgJSON" type="file"  id="fileB" class="inputfile" onchange="cfgFileChange();" accept=".json"/>
+                        <label for="fileB" data-key="Choose an IPS configuration file" >Choose an IPS configuration file</label>
+                        <input id="cfg-form-button-upload" class="submit-button_right" value="Upload" type="button" onclick="open_cfg_upload_dialog();"/>
+                    </form>
+                    <div class="tempr-settings-form">
+                        <div style="margin-top: 5px; margin-bottom: 5px;"> <span data-key="File Name">File Name</span> <span class="beta">: </span><span id="cfgFileName"></span></div>
+                    </div>
                     <div class="more-distance"></div>
                 </div>
+
+
+<!-- NETWORK CONFIGURATION-->
+                <div class="column-div" id="network-box">
+                    <h2 data-key="Network Configuration">Network Configuration</h2>
+                    <div id="network-settings-container">
+                        <h3 data-key="IP Settings">IP Settings</h3>
+                        <form id="ip-settings-form" action="" method="POST">
+                            <p>
+                                <div class="information">
+                                    <span id="i"> &nbsp; &#8505; &nbsp;</span>
+                                </div>
+                                <div class="hidden-info">I am shown when someone hovers over the div above.</div>
+                            </p>
+                            <div id="div-flex" class="keep-distance">
+                                <span class="network-settings-form-text"><span data-key="Configuration">Configuration</span> <span class="beta">:</span></span>
+                                <div id="net">
+                                    <input id="dhcp" onchange="_activate_dhcp()" type="RADIO" name="AssignIPType_Auto" <!--#exec cgi="AssignIPType_Auto"-->>Dynamic (DHCP)
+                                    <br>
+                                    <input id="static" onchange="_activate_manual()" type="RADIO" name="AssignIPType_Manual" <!--#exec cgi="AssignIPType_Manual"-->>Static
+                                </div>
+                            </div>
+                            <div class="keep-distance">
+                                <span class="network-settings-form-text"><span data-key="IP address">IP address</span> <span class="beta">:</span></span>
+                                <input id="ip_0" name="IPAddr_0" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_0"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="ip_1" name="IPAddr_1" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_1"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="ip_2" name="IPAddr_2" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_2"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="ip_3" name="IPAddr_3" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_3"-->" <!--#exec cgi="DisEn"-->>
+                            </div>
+                            <div class="keep-distance">
+                                <span class="network-settings-form-text"><span data-key="Subnet mask">Subnet mask</span> <span class="beta">:</span></span>
+                                <input id="mask_0" name="IPMask_0" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_0"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="mask_1" name="IPMask_1" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_1"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="mask_2" name="IPMask_2" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_2"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="mask_3" name="IPMask_3" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_3"-->" <!--#exec cgi="DisEn"-->>
+                            </div>
+                            <div class="keep-distance">
+                                <span class="network-settings-form-text"><span data-key="Gateway">Gateway</span> <span class="beta">:</span></span>
+                                <input id="gate_0" name="IPGateway_0" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_0"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="gate_1" name="IPGateway_1" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_1"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="gate_2" name="IPGateway_2" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_2"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
+                                <input id="gate_3" name="IPGateway_3" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_3"-->" <!--#exec cgi="DisEn"-->>
+                                <input class="submit-button_right" type="submit" value="Apply" name = "SetIP">
+                            </div>
+                        </form>
+                        <div id="hostname-box">
+                            <h3 data-key="Hostname">Hostname</h3>
+                            <form id="host-settings-form" action="" method="POST">
+                                <span class="host-settings-form-text"><span data-key="Hostname">Hostname</span> <span class="beta">:</span></span>
+                                <input id="host" name="Hostname" type="text" size="12" maxlength="16" value="<!--#exec cgi="Hostname"-->" <!--#exec cgi="DisEn"-->>
+                                <input class="submit-button_right" type="submit" value="Apply" name = "SetHost">
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="more-distance"></div>
+                </div>
+
             </div>
             
             <div class="column-layout" id="middle-layout-col">
-<!-- IPS CONFIGURATION -->
-                <div class="column-div" id="config-box">
-                    <h2 data-key="Configuration Parameters">Configuration Parameters</h2>
-                    <div id="cfg-param-values">
-                        <h3 data-key="Actual Values">Actual Values</h3>
-                        <table class="config-table">
-                            <tbody>
-                                <tr>
-                                    <td data-key="DSP Max Output Current">DSP Max Output Current</td>
-                                    <td id="overcurrent-dsp">0 A</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">RTC Battery Recharge Threshold Voltage</td>
-                                    <td id="recharge-thold">0 V</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="Config1">Config1</td>
-                                    <td id="config-1">0 </td>
-                                </tr>
-                                <tr>
-                                    <td data-key="Config2">Config2</td>
-                                    <td id="config-2">0 </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h3 data-key="Edit Parameters Values">Edit Parameters Values</h3>
-                    </div>
-                    <form class="config-form" action="" method="POST">
-                        <p>
-                            <div class="information">
-                                <span id="i"> &nbsp; &#8505; &nbsp;</span>
-                            </div>
-                            <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-                        </p>
-                        <span class="config-param-form-text" data-key="Set DSP Max Output Current"> Set DSP Max Output Current <span class="beta">:</span></span>
-                        <input name="OverIThold" type="text" size="10" maxlength="3" value="<!--#exec cgi="OverIThold"-->"> A
-                        <button class="submit-button_right" type="submit" value="Set Value" data-key="Set Value">Set Value</button>
-                    </form>
-                    <form class="config-form" action="" method="POST">
-                        <span class="config-param-form-text"><span data-key="Set Recharge Threshold"> Set Recharge Threshold</span> <span class="beta">:</span></span>
-                        <input name="RtcVThold" type="text" size="10" maxlength="4" value="<!--#exec cgi="RtcVThold"-->"> mV
-                        <button class="submit-button_right" type="submit" value="Set Value">Set Value</button>
-                    </form>
-                    <form class="config-form" action="" method="POST">
-                        <span class="config-param-form-text"> <span data-key="Set Config1 Value">Set Config1 Value</span> <span class="beta">:</span></span>
-                        <input name="Config1" type="text" size="10" maxlength="3" value="<!--#exec cgi="Config1"-->">
-                        <button class="submit-button_right" type="submit" value="Set Value">Set Value</button>
-                    </form>
-                    <form class="config-form" action="" method="POST">
-                        <span class="config-param-form-text"> <span data-key="Set Config2 Value">Set Config2 Value</span> <span class="beta">:</span></span>
-                        <input name="Config2" type="text" size="10" maxlength="3" value="<!--#exec cgi="Config2"-->">
-                        <input class="submit-button_right" type="submit" value="Set Value">
-                    </form>
-                    <div id="cfg-param-values">
-                        <h3 data-key="Edit Debug Parameters Values">Edit Debug Parameters Values</h3>
-                    </div>
-                    <form class="config-form" action="" method="POST">
-                        <p>
-                            <div class="information">
-                                <span id="i"> &nbsp; &#8505; &nbsp;</span>
-                            </div>
-                            <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-                        </p>
-                        <span class="config-param-form-text"> <span data-key="Set Debug 0 Parameter Value">Set Debug 0 Parameter Value</span> <span class="beta">:</span></span>
-                        <input name="Debug0" type="text" size="10" maxlength="6" value="<!--#exec cgi="Debug0"-->">
-                        <input class="submit-button_right" type="submit" value="Set Value">
-                    </form>
-                    <form class="config-form" action="" method="POST">
-                        <span class="config-param-form-text"> <span data-key="Set Debug 1 Parameter Value">Set Debug 1 Parameter Value</span> <span class="beta">:</span></span>
-                        <input name="Debug1" type="text" size="10" maxlength="6" value="<!--#exec cgi="Debug1"-->">
-                        <input class="submit-button_right" type="submit" value="Set Value">
-                    </form>
-                    <form class="config-form" action="" method="POST">
-                        <span class="config-param-form-text"> <span data-key="Set Debug 2 Parameter Value">Set Debug 2 Parameter Value</span> <span class="beta">:</span></span>
-                        <input name="Debug2" type="text" size="10" maxlength="6" value="<!--#exec cgi="Debug2"-->">
-                        <input class="submit-button_right" type="submit" value="Set Value">
-                    </form>
-                    <form class="config-form" action="" method="POST">
-                        <span class="config-param-form-text"> <span data-key="Set Debug 3 Parameter Value">Set Debug 3 Parameter Value</span> <span class="beta">:</span></span>
-                        <input name="Debug3" type="text" size="10" maxlength="6" value="<!--#exec cgi="Debug3"-->">
-                        <button class="submit-button_right" type="submit" value="Set Value">Set Value</button>
-                    </form>
-                    <div class="more-distance"></div>
-                </div>
+
 
 <!-- IPS TEMPERATURE -->
                 <div class="column-div" id="sys-temperature-box">
@@ -414,12 +298,12 @@
                         <table class="rtc-settings-table">
                             <tbody>
                             <tr>
-                                <th><span data-key="Year">Year</span>: <span id="year"></span></th>
-                                <th><span data-key="Month">Month</span>: <span id="month"></span></th>
-                                <th><span data-key="Day">Day</span>: <span id="day"></span></th>
-                                <th><span data-key="Hour">Hour</span>: <span id="hour"></span></th>
-                                <th><span data-key="Min">Min</span>: <span id="min"></span></th>
-                                <th><span data-key="Sec">Sec</span>: <span id="sec"></span></th>
+                                <td><span data-key="Year">Year</span>: <span id="year"></span></td>
+                                <td><span data-key="Montd">Montd</span>: <span id="montd"></span></td>
+                                <td><span data-key="Day">Day</span>: <span id="day"></span></td>
+                                <td><span data-key="Hour">Hour</span>: <span id="hour"></span></td>
+                                <td><span data-key="Min">Min</span>: <span id="min"></span></td>
+                                <td><span data-key="Sec">Sec</span>: <span id="sec"></span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -462,17 +346,7 @@
                         </table>
                         <h3 id="prod-info-edit-h3" data-key="Edit Product Information">Edit Product Information</h3>
                         <div id="prod-info-admin">
-                            <form id="prod-sn" class="prod-info-form" action="" method="POST">
-                                <p>
-                                    <div class="information">
-                                        <span id="i"> &nbsp; &#8505; &nbsp;</span>
-                                    </div>
-                                    <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-                                </p>
-                                <span class="prod-info-form-text"> <span data-key="Edit IPS Serial Number">Edit IPS Serial Number</span> <span class="beta">:</span></span>
-                                <input name="SerialNr" type="text" size="25" maxlength="25" placeholder="XX-XX-XX-XX-XX-XX-XX-XX-X">
-                                <input class="submit-button_right" type="submit" value="Submit">
-                            </form>
+
                             <form class="prod-info-form" action="" method="POST">
                                 <span class="prod-info-form-text"><span data-key="Edit IPS ID / Name">Edit IPS ID / Name</span> <span class="beta">:</span></span>
                                 <input name="NameOrId" type="text" size="25" maxlength="25" placeholder="IPS-WC3-CX-0000-0000-000">
@@ -528,7 +402,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h3 id="fw-up-h3" data-key=">Firmware Update">Firmware Update</h3>
+                        <h3 id="fw-up-h3" data-key="DSP Firmware Update">DSP Firmware Update</h3>
                     </div>
                     <div id="fw-admin-box">
                         <dialog class="alert-dialog" id="fw_update_dialog">
@@ -621,162 +495,7 @@
                     <div class="more-distance"></div>
                 </div>
 
-<!-- NETWORK CONFIGURATION-->
-                <div class="column-div" id="network-box">
-                    <h2 data-key="Network Configuration">Network Configuration</h2>
-                    <div id="network-settings-container">
-                        <h3 data-key="IP Settings">IP Settings</h3>
-                        <form id="ip-settings-form" action="" method="POST">
-                            <p>
-                                <div class="information">
-                                    <span id="i"> &nbsp; &#8505; &nbsp;</span>
-                                </div>
-                                <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-                            </p>
-                            <div id="div-flex" class="keep-distance">
-                                <span class="network-settings-form-text"><span data-key="Configuration">Configuration</span> <span class="beta">:</span></span>
-                                <div id="net">
-                                    <input id="dhcp" onchange="_activate_dhcp()" type="RADIO" name="AssignIPType_Auto" <!--#exec cgi="AssignIPType_Auto"-->>Dynamic (DHCP)
-                                    <br>
-                                    <input id="static" onchange="_activate_manual()" type="RADIO" name="AssignIPType_Manual" <!--#exec cgi="AssignIPType_Manual"-->>Static
-                                </div>
-                            </div>
-                            <div class="keep-distance">
-                                <span class="network-settings-form-text"><span data-key="IP address">IP address</span> <span class="beta">:</span></span>
-                                <input id="ip_0" name="IPAddr_0" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_0"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="ip_1" name="IPAddr_1" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_1"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="ip_2" name="IPAddr_2" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_2"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="ip_3" name="IPAddr_3" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPAddr_3"-->" <!--#exec cgi="DisEn"-->>
-                            </div>
-                            <div class="keep-distance">
-                                <span class="network-settings-form-text"><span data-key="Subnet mask">Subnet mask</span> <span class="beta">:</span></span>
-                                <input id="mask_0" name="IPMask_0" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_0"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="mask_1" name="IPMask_1" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_1"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="mask_2" name="IPMask_2" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_2"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="mask_3" name="IPMask_3" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPMask_3"-->" <!--#exec cgi="DisEn"-->>
-                            </div>
-                            <div class="keep-distance">
-                                <span class="network-settings-form-text"><span data-key="Gateway">Gateway</span> <span class="beta">:</span></span>
-                                <input id="gate_0" name="IPGateway_0" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_0"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="gate_1" name="IPGateway_1" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_1"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="gate_2" name="IPGateway_2" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_2"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="gate_3" name="IPGateway_3" type="text" size="2" maxlength="3" value="<!--#exec cgi="IPGateway_3"-->" <!--#exec cgi="DisEn"-->>
-                                <input class="submit-button_right" type="submit" value="Apply" name = "SetIP">
-                            </div>
-                        </form>
-                        <div id="hostname-box">
-                            <h3 data-key="Hostname">Hostname</h3>
-                            <form id="host-settings-form" action="" method="POST">
-                                <span class="host-settings-form-text"><span data-key="Hostname">Hostname</span> <span class="beta">:</span></span>
-                                <input id="host" name="Hostname" type="text" size="12" maxlength="16" value="<!--#exec cgi="Hostname"-->" <!--#exec cgi="DisEn"-->>
-                                <input class="submit-button_right" type="submit" value="Apply" name = "SetHost">
-                            </form>
-                        </div>
-                        <div id="dns-box">
-                            <h3 data-key="DNS Server">DNS Server</h3>
-                            <form id="dns-settings-form" action="" method="POST">
-                                <span class="dns-settings-form-text"><span data-key="DNS address">DNS address</span> <span class="beta">:</span></span>
-                                <input id="dns_0" name="DNSAddr_0" type="text" size="2" maxlength="3" value="<!--#exec cgi="DNSAddr_0"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="dns_1" name="DNSAddr_1" type="text" size="2" maxlength="3" value="<!--#exec cgi="DNSAddr_1"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="dns_2" name="DNSAddr_2" type="text" size="2" maxlength="3" value="<!--#exec cgi="DNSAddr_2"-->" <!--#exec cgi="DisEn"-->><span class="ip-point">.</span>
-                                <input id="dns_3" name="DNSAddr_3" type="text" size="2" maxlength="3" value="<!--#exec cgi="DNSAddr_3"-->" <!--#exec cgi="DisEn"-->>
-                                <input class="submit-button_right" type="submit" value="Apply" name = "SetDNS">
-                            </form>
-                        </div>
-                        <div id="mac-box">
-                            <h3 data-key="MAC">MAC</h3>
-                            <form id="mac-settings-form" action="" method="POST">
-                                <span class="mac-settings-form-text"><span data-key="MAC address">MAC address</span> <span class="beta">:</span></span>
-                                <input id="mac_4" name="MACAddr_4" type="text" size="1" maxlength="2" value="<!--#exec cgi="MACAddr_4"-->"><span class="mac-dash">-</span>
-                                <input id="mac_5" name="MACAddr_5" type="text" size="1" maxlength="2" value="<!--#exec cgi="MACAddr_5"-->"><span class="mac-dash">-</span>
-                                <input id="mac_0" name="MACAddr_0" type="text" size="1" maxlength="2" value="<!--#exec cgi="MACAddr_0"-->"><span class="mac-dash">-</span>
-                                <input id="mac_1" name="MACAddr_1" type="text" size="1" maxlength="2" value="<!--#exec cgi="MACAddr_1"-->"><span class="mac-dash">-</span>
-                                <input id="mac_2" name="MACAddr_2" type="text" size="1" maxlength="2" value="<!--#exec cgi="MACAddr_2"-->"><span class="mac-dash">-</span>
-                                <input id="mac_3" name="MACAddr_3" type="text" size="1" maxlength="2" value="<!--#exec cgi="MACAddr_3"-->">
-                                <input class="submit-button_right" type="submit" value="Apply" name = "SetMAC">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="more-distance"></div>
-                </div>
 
-<!-- IPS CONFIG FILE-->
-                <div class="column-div" id="config-file-box">
-                    <h2 data-key="IPS Configuration File">IPS Configuration File</h2>
-                    <div id="cfg-up-download">
-                    </div>
-                    <dialog class="alert-dialog" id="cfg_upload_dialog">
-                        <div class="warning">
-                            <span id="w"> &#9888; </span>
-                            <p id="offset-text" data-key="A new IPS configuration will be uploaded.">A new IPS configuration will be uploaded.</p>
-                            <p id="offset-text" data-key="The IPS parameters will be updated to the new configuration values!">The IPS parameters will be updated to the new configuration values!</p>
-                            <div class="more-distance"></div>
-                        </div>
-                        <form id="cfg-upload-diag"  action="" method="POST">
-                            <button class="submit-button_right" value="Abort" type="submit" onclick="close_cfg_upload_dialog_no();" data-key="Abort">Abort</button>
-                            <button class="submit-button_right" value="OK" type="button" onclick="close_cfg_upload_dialog_ok();" data-key="OK">OK</button>
-                        </form>    
-                    </dialog>
-                    <dialog class="alert-dialog" id="cfg_upload_finished_dialog">
-                        <div class="info">
-                            <span id="info">&nbsp;&#8505;</span>  
-                            <p id="offset-text" data-key="Finished uploading new IPS configuration file.">Finished uploading new IPS configuration file.</p>
-                            <p id="offset-text" data-key="A system reset will be performed now!.">A system reset will be performed now!.</p>
-                            <div class="more-distance"></div>
-                        </div>
-                        <form id="cfg-upload-finished-diag"  action="" method="POST">
-                            <button class="submit-button_right" name="updateCfg" value="Close" type="submit" onclick="close_cfg_upload_finished_dialog();" data-key="Close">Close</button>
-                        </form> 
-                    </dialog>
-                    <dialog class="alert-dialog" id="not_ips_cfg_file_dialog">
-                        <div class="error">
-                            <span id="x-1">&#x2716;</span>
-                            <p id="offset-text" data-key="The chosen file is not an IPS configuration file!">The chosen file is not an IPS configuration file!</p>
-                            <p id="offset-text" data-key="Please choose the right file.">Please choose the right file.</p>
-                            <div class="more-distance"></div>
-                        </div>
-                        <form id="no-ips-cfg-file-diag"  action="" method="POST">
-                            <button class="submit-button_right" value="Close" type="submit" onclick="close_not_ips_cfg_file_dialog();" data-key="Close" >Close</button>
-                        </form> 
-                    </dialog>
-                    <dialog class="alert-dialog" id="no_cfg_file_dialog">
-                        <div class="error">
-                            <span id="x-1">&#x2716;</span>
-                            <p id="offset-text" data-key="No IPS config .json file is selected!">No IPS config .json file is selected!</p>
-                            <p id="offset-text" data-key="Please select a valid IPS config .json file.">Please select a valid IPS config .json file.</p>
-                            <div class="more-distance"></div>
-                        </div>
-                        <button class="dialog-button" onclick="close_no_cfg_file_dialog()" data-key="Close">Close</button>
-                    </dialog>
-                    <dialog class="alert-dialog" id="no_json_format_dialog">
-                        <div class="error">
-                            <span id="x-1">&#x2716;</span>
-                            <p id="offset-text" data-key="Not a valid .json file or some data are corrupted!">Not a valid .json file or some data are corrupted!</p>
-                            <p id="offset-text" data-key="Please select a valid JSON formatted .json file.">Please select a valid JSON formatted .json file.</p>
-                            <div class="more-distance"></div>
-                        </div>
-                        <button class="dialog-button" onclick="close_no_json_format_dialog()" data-key="Close">Close</button>
-                    </dialog>
-                    <form class="config-form" action="" method="POST" onsubmit="return false">
-                        <p>
-                            <div class="information">
-                                <span id="i"> &nbsp; &#8505; &nbsp;</span>
-                            </div>
-                            <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-                        </p>
-                        <span class="config-param-form-text" data-key="Download IPS configuration file"> Download IPS configuration file <span class="beta">:</span></span>
-                        <button class="submit-button_right" type="submit" value="Download" onclick="downloadCfgFile()" data-key="Download">Download</button>
-                    </form>
-                    <form class="cfg-upload-form"  action="" method="POST">
-                        <input name="cfgJSON" type="file"  id="fileB" class="inputfile" onchange="cfgFileChange();" accept=".json"/>
-                        <label for="fileB" data-key="Choose an IPS configuration file" >Choose an IPS configuration file</label>
-                        <input id="cfg-form-button-upload" class="submit-button_right" value="Upload" type="button" onclick="open_cfg_upload_dialog();"/>
-                    </form>
-                    <div class="tempr-settings-form">
-                        <div style="margin-top: 5px; margin-bottom: 5px;"> <span data-key="File Name">File Name</span> <span class="beta">: </span><span id="cfgFileName"></span></div>
-                    </div>
-                    <div class="more-distance"></div>
-                </div>
                 <div class="pattern dots"></div>
             </div>
         </div>

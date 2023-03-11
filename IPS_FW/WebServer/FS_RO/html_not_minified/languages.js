@@ -1,7 +1,6 @@
 var lang = sessionStorage.getItem("lang") ? sessionStorage.getItem("lang") : "EN";
 var languageTexts = {
     "EN": {
-        // INDEX
         "Inductive-Power-Supply": "Inductive-Power-Supply",
         "Monitor": "Monitor",
         "Settings": "Settings",
@@ -70,7 +69,6 @@ var languageTexts = {
         "IS-PAD OVER TEMPERATURE ERR": "IS-PAD OVER TEMPERATURE ERR",
         "HEAT-SINK OVER TEMPERATURE ERR": "HEAT-SINK OVER TEMPERATURE ERR",
         "OVER VOLTAGE ERR": "OVER VOLTAGE ERR",
-        // SETTINGS
         "IPS System Data": "IPS System Data",
         "Diagnostics": "Diagnostics",
         "Output Voltage": "Output Voltage",
@@ -127,11 +125,9 @@ var languageTexts = {
         "Set Config2 Value": "Set Config2 Value",
         "Edit Debug Parameters Values": "Edit Debug Parameters Values",
         "username": "username",
-        //SETTINGS LOGIN
         "username": "username",
         "password": "password",
         "Login": "Login",
-        // LOGS
         "Client Side Logging": "Client Side Logging",
         "Client Side Logging Control": "Client Side Logging Control",
         "Select Data Logging Frequency": "Select Data Logging Frequency",
@@ -141,11 +137,7 @@ var languageTexts = {
         "Clear IPS System Log": "Clear IPS System Log",
         "System Logging Control": "System Logging Control",
         "Select System Logging Level": "Select System Logging Level"
-
-
-    },
-    "DE": {
-
+    }, "DE": {
         "Inductive-Power-Supply": "Inductive-Power-Supply",
         "Monitor": "Monitor",
         "Settings": "Einstellungen",
@@ -154,9 +146,9 @@ var languageTexts = {
         "Description": "Beschreibung",
         "Value": "Wert",
         "Unit": "Einheit",
-        "OUTPUT VOLTAGE": "OUTPUT VOLTAGE",
+        "OUTPUT VOLTAGE": "AUSGANGSSPANNUNG",
         "OUTPUT CURRENT": "AUSGANGSSTROM",
-        "OUTPUT POWER": "AUSGANGSSCHEINLEISTUNG",
+        "OUTPUT POWER": "AUSGANGSLEISTUNG",
         "DC-LINK VOLTAGE": "ZWISCHENKREISSPANNUNG ",
         "MAINS CURRENT": "NETZSTROM",
         "MAINS VOLTAGE RMS": "NETZSPANNUNG EFFEKTIVWERT",
@@ -174,7 +166,7 @@ var languageTexts = {
         "BOOTLOADER BUILD DATE & TIME": "BOOTLOADER ERSTELLUNGSDATUM UND -ZEIT",
         "Inverter DSP": "Umrichter DSP",
         "Status LEDs": "Status LEDs",
-        "I am shown when someone hovers over the div above.": "I am shown when someone hovers over the div above.",
+        "I am shown when someone hovers over the div above.": "Ich werde angezeigt wenn jemand über den oberen div hovert.",
         "Real Time Clock RTC": "Echtzeit-Uhr (RTC)",
         "Year": "Jahr",
         "Month": "Monat",
@@ -214,12 +206,11 @@ var languageTexts = {
         "IS-PAD OVER TEMPERATURE ERR": "ÜBERTEMPERATUR IS-PAD",
         "HEAT-SINK OVER TEMPERATURE ERR": "ÜBERTEMPERATUR KÜHLKÖRPER",
         "OVER VOLTAGE ERR": "   ÜBERSPANNUNG AUSGANG",
-        // SETTINGS
         "IPS System Data": "IPS System Daten",
         "Diagnostics": "Diagnose",
         "Output Voltage": "Ausgangsspannung",
         "Output Current": "Ausgangsstrom",
-        "Output Power ": "Output Power ",
+        "Output Power ": "AUSGANGSLEISTUNG ",
         "IS-Pad Temperature": "IS-Pad Temperatur",
         "Heat-Sink Temperature": "Kühlkörper Temperatur",
         "Inverter PWM Signals Duty-Cycle": "Wechselrichter Stellgröße",
@@ -270,7 +261,7 @@ var languageTexts = {
         "Set Config1 Value": "Config1 Parameter bearbeiten",
         "Set Config2 Value": "Config2 Parameter bearbeiten",
         "Edit Debug Parameters Values": "Debug Parameterwerte bearbeiten",
-          "Set Debug 0 Parameter Value": "Debug 0 Parameter bearbeiten",
+        "Set Debug 0 Parameter Value": "Debug 0 Parameter bearbeiten",
         "Set Debug 1 Parameter Value": "Debug 1 Parameter bearbeiten",
         "Set Debug 2 Parameter Value": "Debug 2 Parameter bearbeiten",
         "Set Debug 3 Parameter Value": "Debug 3 Parameter bearbeiten",
@@ -301,7 +292,7 @@ var languageTexts = {
         "CPU Bootloader": "CPU Bootloader",
         "DSP Application": "DSP Applikation",
         "DSP Bootloader": "DSP Bootloader",
-        ">Firmware Update": ">Firmware Aktualisierung",
+        "DSP Firmware Update": "DSP Firmware Aktualisierung",
         "A new IPS master CPU firmware is successfully uploaded.": "Eine neue IPS Firmware wurde erfolgreich hochgeladen.",
         "An update to the new version will be performed!": "Es wird ein Update auf die neue Version durchgeführt!",
         "OK": "OK",
@@ -341,12 +332,9 @@ var languageTexts = {
         "Please select a valid JSON formatted .json file.": "Bitte wählen Sie eine gültige JSON-formatierte .json-Datei.",
         "Download IPS configuration file": " IPS Konfigurationsdatei Herunterladen",
         "Choose an IPS configuration file": "IPS Konfigurationsdatei whälen",
-
-        //SETTINGS LOGIN
         "username": "Nutzername",
         "password": "Passwort",
         "Login": "Anmeldung",
-        // LOGS
         "Client Side Logging": "Clientseitig Loggen",
         "Client Side Logging Control": "Clientseitiges Loggen Steuerung",
         "Select Data Logging Frequency": "Frequenz der Datenaufzeichnung wählen",
@@ -356,7 +344,6 @@ var languageTexts = {
         "Clear IPS System Log": "IPS System Log löschen",
         "System Logging Control": "System Logging Steuerung",
         "Select System Logging Level": "System Logging-Stufe auswählen"
-
     }
 };
 
@@ -377,13 +364,11 @@ function refreshLabels(lang) {
 }
 
 function changeLang(lang) {
-
     sessionStorage.setItem("lang", lang);
     refreshLabels(lang);
 }
 
 function initLanguage() {
-
     console.log("initLanguage")
     lang = sessionStorage.getItem("lang") ? sessionStorage.getItem("lang") : "EN";
     refreshLabels(lang);
