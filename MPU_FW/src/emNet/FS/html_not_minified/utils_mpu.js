@@ -64,19 +64,25 @@ function settingDownload() {
     }
 
     for (let i = 0; i < inputs.length; i++) {
+
         if (!inputs[i].disabled) {
-            valueElement = document.getElementById("sse_" + inputs[i].name);
-            if (valueElement) {
-                settingData[inputs[i].name] = valueElement.innerHTML
+            if (inputs[i].type == "checkbox") {
+                settingData[inputs[i].name] = inputs[i].checked ? "1" : "0";
+            } else {
+                valueElement = document.getElementById("sse_" + inputs[i].name);
+                if (valueElement) {
+                    settingData[inputs[i].name] = valueElement.innerHTML
+                }
             }
         }
+
     }
 
     const jsonBlob = new Blob([JSON.stringify(settingData)], {type: "application/json"});
     const downloadLink = document.createElement("a");
     downloadLink.href = URL.createObjectURL(jsonBlob);
     const currentDate = new Date().toISOString().slice(0, 10);
-    downloadLink.download = `IPS_setting_${currentDate}.json`;
+    downloadLink.download = `MPU_setting_${currentDate}.json`;
     downloadLink.click();
     URL.revokeObjectURL(downloadLink.href);
     logger?.debug("Send json string: " + jsonBlob);
@@ -126,18 +132,16 @@ function settingImport() {
             http.onreadystatechange = function () {
                 if (http.readyState === XMLHttpRequest.DONE) {
                     if (http.status === 200) {
-                        textarea.value += key + " = " + jsonData[key] + "updated. \n";
-
+                        textarea.value += key + " = " + jsonData[key] + " updated. \n";
+                        logger?.debug("Configuration Import:" + key + " = " + jsonData[key] + " updated.");
                     } else {
-                        textarea.value += key + " = " + jsonData[key] + "couldn't update. \n";
+                        textarea.value += key + " = " + jsonData[key] + " update error. \n";
+                        logger?.debug("Configuration Import:" + key + " = " + jsonData[key] + " update error.");
                     }
                 }
             };
         }
     }
     reader.readAsText(file);
-    file.value = '';
-    file.type = 'text'
-    file.type = 'file';
 
 }

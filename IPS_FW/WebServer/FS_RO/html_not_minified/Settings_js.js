@@ -1162,3 +1162,89 @@ function myFunction()
         navbar.classList.remove("sticky");
     }
 }
+
+function settingDownload() {
+    const settingData = {};
+    const inputs = document.getElementsByTagName("input");
+    const selects = document.getElementsByTagName("select");
+
+    for (let i = 0; i < selects.length; i++) {
+        settingData[selects[i].name] = selects[i].value
+    }
+
+    for (let i = 0; i < inputs.length; i++) {
+        if (!inputs[i].disabled) {
+            valueElement = document.getElementById("sse_" + inputs[i].name);
+            if (valueElement) {
+                settingData[inputs[i].name] = valueElement.innerHTML
+            }
+        }
+    }
+
+    const jsonBlob = new Blob([JSON.stringify(settingData)], {type: "application/json"});
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(jsonBlob);
+    const currentDate = new Date().toISOString().slice(0, 10);
+    downloadLink.download = `IPS_setting_${currentDate}.json`;
+    downloadLink.click();
+    URL.revokeObjectURL(downloadLink.href);
+    logger?.debug("Send json string: " + jsonBlob);
+}
+
+function settingImport() {
+
+    const file = document.getElementById("configuration_file").files[0];
+    if (!file) {
+        alert("Please select a file");
+        return;
+    }
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+
+        const jsonData = JSON.parse(event.target.result);
+
+        logger?.debug(file.name + " read" + jsonData);
+        textarea = document.getElementById("config_file");
+        textarea.value += file.name + " read. \n";
+        for (let key in jsonData) {
+
+            const http = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            const url = "PostData.cgi";
+            http.open("POST", url, true);
+            http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            http.onload = function () {
+                logger?.debug("Submit response: " + http.statusText);
+                logger?.debug("Submit response: " + http.responseText.replace(/<[^>]*>?/gm, '').replace(/(\r\n|\n|\r)/gm, "").substring(0, 50));
+            }
+            http.onerror = function () {
+                logger?.error("Submit error");
+            };
+            http.ontimeout = function () {
+                logger?.error("Submit timeout");
+            };
+
+            data = {};
+            data[key] = jsonData[key];
+            const json = JSON.stringify(data);
+            logger?.debug("Send json string: " + json);
+            http.timeout = 1000;
+
+            http.send(json);
+            http.onreadystatechange = function () {
+                if (http.readyState === XMLHttpRequest.DONE) {
+                    if (http.status === 200) {
+                        textarea.value += key + " = " + jsonData[key] + "updated. \n";
+
+                    } else {
+                        textarea.value += key + " = " + jsonData[key] + "couldn't update. \n";
+                    }
+                }
+            };
+        }
+    }
+    reader.readAsText(file);
+
+
+}

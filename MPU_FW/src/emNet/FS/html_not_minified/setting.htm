@@ -22,898 +22,1014 @@
 </head>
 
 <body>
-    <!-- Menu -->
-    <header>
-        <div class="title-acronyme">
-            <!--#exec cgi="GetText?PRODUCT_SHORT_NAME"-->
-            <span class="title">:&nbsp;<!--#exec cgi="GetText?PRODUCT_LONG_NAME"--></span>
-            <span id="offline" class="title"></span>
+<!-- Menu -->
+<header>
+    <div class="title-acronyme">
+        <!--#exec cgi="GetText?PRODUCT_SHORT_NAME"-->
+        <span class="title">:&nbsp;<!--#exec cgi="GetText?PRODUCT_LONG_NAME"--></span>
+        <span id="offline" class="title"></span>
+    </div>
+    <div class="dropdown">
+        <div class="language" id="lan"><span id="sse_lang">EN</span> &#9662;</div>
+        <div class="dropdown-content">
+            <form action="javascript:changeLang('EN');" target="_self" method="POST">
+                <input type="submit" name="Language" class="english" value="EN">
+            </form>
+            <form action="javascript:changeLang('DE');" target="_self" method="POST">
+                <input type="submit" name="Language" class="deutsch" value="DE">
+            </form>
         </div>
-<div class="dropdown">
-                <div class="language" id="lan"><span id="sse_lang">EN</span> &#9662;</div>
-                <div class="dropdown-content">
-                    <form action="javascript:changeLang('EN');" target="_self" method="POST">
-                        <input type="submit" name="Language" class="english" value="EN">
-                    </form>
-                    <form action="javascript:changeLang('DE');" target="_self" method="POST">
-                        <input type="submit" name="Language" class="deutsch" value="DE">
-                    </form>
-                </div>
-            </div>
-        <ul id="sticky_navbar">
-            <li><div><span><dummy></dummy></span></div></li>
-            <li><div><a class="right-border" href="index.htm" data-key="Monitor" >Monitor</a></div></li>
-            <li><div><span class="active" data-key="Setting">Setting</span></div></li>
-            <li><div><a class="left-border" href="logging.htm" data-key="Logging">Logging</a></div></li>
-            <li><div><span><dummy></dummy></span></div></li>
-            <li id="sse_nav_debug" hide><div><a href="debug.htm" data-key="Debug">Debug</a></div></li>
+    </div>
+    <ul id="sticky_navbar">
+        <li>
+            <div><span><dummy></dummy></span></div>
+        </li>
+        <li>
+            <div><a class="right-border" href="index.htm" data-key="Monitor">Monitor</a></div>
+        </li>
+        <li>
+            <div><span class="active" data-key="Setting">Setting</span></div>
+        </li>
+        <li>
+            <div><a class="left-border" href="logging.htm" data-key="Logging">Logging</a></div>
+        </li>
+        <li>
+            <div><span><dummy></dummy></span></div>
+        </li>
+        <li id="sse_nav_debug" hide>
+            <div><a href="debug.htm" data-key="Debug">Debug</a></div>
+        </li>
 
 
-        </ul>
+    </ul>
 
-        <a href="https://www.conductix.com/en">
-            <img src="logo_mpu.png" alt="Conductix-Wampfler Automation GmbH" class="logo">
-        </a>
-    </header>
+    <a href="https://www.conductix.com/en">
+        <img src="logo_mpu.png" alt="Conductix-Wampfler Automation GmbH" class="logo">
+    </a>
+</header>
 
-    <!-- Content -->
-    <content>
-        <!-- Row 1 -->
-        <row-layout>
-            <!-- Column 1 -->
-            <col-layout>
-                <!-- Errors & Warnings Reset -->
+<!-- Content -->
+<content>
+    <!-- Row 1 -->
+    <row-layout>
+        <!-- Column 1 -->
+        <col-layout>
+            <!-- Errors & Warnings Reset -->
+            <box-layout>
+                <h2 data-key="Error & Warning Reset">Error & Warning Reset
+                    <info></info>
+                    <info-box data-key="error-warning-reset-info-box">Press the 'Reset' button to reset all errors and
+                        warnings. If the cause of the
+                        error/warning is still present, the error/warning is generated again.
+                    </info-box>
+                </h2>
+
+                <!----------------------->
+                <h3></h3>
                 <box-layout>
-                    <h2 data-key="Error & Warning Reset">Error & Warning Reset
-                        <info></info>
-                        <info-box data-key="error-warning-reset-info-box">Press the 'Reset' button to reset all errors and warnings. If the cause of the
-                            error/warning is still present, the error/warning is generated again.
-                        </info-box>
-                    </h2>
+                    <form method="POST">
+                        <label data-key="" Reset MPU error & warning</label><!-- TODO: -->
+                        <button name="error_reset" class="right" type="button" onclick="FormSubmit(this.form)">Reset
+                        </button>
+                    </form>
+                </box-layout>
+            </box-layout>
+            <!-- Charging Power Management -->
+            <box-layout>
+                <h2 data-key="Charging Power Management">Charging Power Management</h2>
 
-                    <!----------------------->
-                    <h3></h3>
+                <!----------------------->
+                <box-layout>
                     <box-layout>
                         <form method="POST">
-                            <label data-key=""Reset MPU error & warning</label><!-- TODO: -->
-                            <button name="error_reset" class="right" type="button" onclick="FormSubmit(this.form)">Reset</button>
+                            <label data-key="Select charging mode">Select charging mode</label>
+                            <select id="sse_charging_mode" name="charging_mode" class="right"
+                                    onchange="FormSubmit(this.form)">
+                                <option value="0" hide selected>-</option>
+                                <option value="1" data-key="Manual">Manual</option>
+                                <option value="2" data-key="BMS only">BMS only</option>
+                                <option value="3" data-key="BMS & PLC">BMS & PLC</option>
+                                <option value="4" data-key="PLC only">PLC only</option>
+                            </select>
+                        </form>
+                    </box-layout>
+
+                    <box-layout id="sse_bms_type_box">
+                        <form method="POST">
+                            <label data-key="Select BMS type">Select BMS type</label>
+                            <select id="sse_bms_type" name="bms_type" class="right" onchange="FormSubmit(this.form)">
+                                <option value="0" hide selected>-</option>
+                                <option value="1" data-key="Can">Can</option>
+                                <option value="2" data-key="Can Open">Can Open</option>
+
+                            </select>
                         </form>
                     </box-layout>
                 </box-layout>
-                <!-- Charging Power Management -->
-                <box-layout>
-                    <h2 data-key="Charging Power Management">Charging Power Management</h2>
 
-                    <!----------------------->
-                    <box-layout>
+                <box-layout id="sse_selfstart_box" hide>
+                    <form method="POST">
                         <box-layout>
-                            <form method="POST">
-                                <label data-key="Select charging mode">Select charging mode</label>
-                                <select id="sse_charging_mode" name="charging_mode" class="right" onchange="FormSubmit(this.form)">
-                                    <option value="0" hide selected>-</option>
-                                    <option value="1" data-key="Manual">Manual</option>
-                                    <option value="2" data-key="BMS only">BMS only</option>
-                                    <option value="3" data-key="BMS & PLC">BMS & PLC</option>
-                                    <option value="4"data-key="PLC only">PLC only</option>
-                                </select>
-                            </form>
+                            <label data-key="">Self starting device</label>
+                            <info></info>
+                            <info-box data-key="">If enabled, the MPU automatically switches to the operational state
+                                without being instructed by
+                                the NMT master.
+                            </info-box>
+                            <label class="switch right">
+                                <input id="sse_selfstart_enable" name="selfstart_enable" type="checkbox"
+                                       onclick="this.value^=1" onchange="FormSubmit(this.form)">
+                                <span class="slider"></span>
+                            </label>
                         </box-layout>
+                    </form>
+                </box-layout>
 
-                        <box-layout id="sse_bms_type_box">
-                            <form method="POST">
-                                <label data-key="Select BMS type">Select BMS type</label>
-                                <select id="sse_bms_type" name="bms_type" class="right" onchange="FormSubmit(this.form)">
-                                    <option value="0" hide selected>-</option>
-                                    <option value="1" data-key="Can">Can</option>
-                                    <option value="2  data-key="Can Open">Can Open</option>
-                                </select>
-                            </form>
-                        </box-layout>
-                    </box-layout>
-
-                    <box-layout id="sse_selfstart_box" hide>
-                        <form method="POST">
-                            <box-layout>
-                                <label data-key="">Self starting device</label>
-                                <info></info><info-box data-key="">If enabled, the MPU automatically switches to the operational state without being instructed by
-                                    the NMT master.</info-box>
-                                <label class="switch right">
-                                    <input id="sse_selfstart_enable" name="selfstart_enable" type="checkbox" onclick="this.value^=1" onchange="FormSubmit(this.form)">
-                                    <span class="slider"></span>
-                                </label>
-                            </box-layout>
-                        </form>
-                    </box-layout>
-
-                    <box-layout  id="sse_manual_enable_box">
-                        <form method="POST">
-                            <box-layout>
-                                <label data-key="">Enable / disable power transfer</label>
-                                <label class="switch right">
-                                    <input id="sse_charging_enable" name="charging_enable" type="checkbox" onclick="this.value^=1" onchange="FormSubmit(this.form)">
-                                    <span class="slider"></span>
-                                </label>
-                            </box-layout>
-                        </form>
-                    </box-layout>
-
-                    <!----------------------->
-                    <box-layout id="sse_manual_setting_box">
-                        <h3 data-key="">Manual parameter
-                            <info hide></info><info-box data-key="">TODO: I am shown when someone hovers over the div above.</info-box>
-                        </h3>
-                        <table>
-                            <caption hide></caption>
-                            <tbody>
-                                <tr>
-                                    <th data-key="">Descripton</th>
-                                    <th data-key="">Value</th>
-                                    <th data-key="">Unit</th>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Charging set current</td>
-                                    <td id="sse_batt_i_set">-</td>
-                                    <td class="unit">A</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Charging set voltage</td>
-                                    <td id="sse_batt_v_set">-</td>
-                                    <td class="unit">V</td>
-                                </tr>
-                                <tr>
-                                    <td data-key="">Charging set power</td>
-                                    <td id="sse_batt_p_set">-</td>
-                                    <td class="unit">kW</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+                <box-layout id="sse_manual_enable_box">
+                    <form method="POST">
                         <box-layout>
-                            <!----------------------->
-                            <h3></h3>
-                            <box-layout>
-                                <form method="POST">
-                                    <box-layout>
-                                        <label data-key="">Set battery charging current [A]</label>
-                                        <input name="batt_set_i" class="right" type="number" min="0" max="60" step="0.001" placeholder="A" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                                    </box-layout>
-                                    <box-layout>
-                                        <label data-key="">Set battery charging voltage [V]</label>
-                                        <input name="batt_set_v" class="right"  type="number" min="0" max="60" step="0.001" placeholder="V" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                                    </box-layout>
-
-                                    <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
-                                </form>
-                            </box-layout>
+                            <label data-key="">Enable / disable power transfer</label>
+                            <label class="switch right">
+                                <input id="sse_charging_enable" name="charging_enable" type="checkbox"
+                                       onclick="this.value^=1" onchange="FormSubmit(this.form)">
+                                <span class="slider"></span>
+                            </label>
                         </box-layout>
-                    </box-layout>
+                    </form>
+                </box-layout>
 
-                    <!----------------------->
-                    <h3 data-key="">General parameter
-                        <info hide></info><info-box data-key="">TODO: I am shown when someone hovers over the div above.</info-box>
+                <!----------------------->
+                <box-layout id="sse_manual_setting_box">
+                    <h3 data-key="">Manual parameter
+                        <info hide></info>
+                        <info-box data-key="">TODO: I am shown when someone hovers over the div above.</info-box>
                     </h3>
-
                     <table>
                         <caption hide></caption>
                         <tbody>
-                            <tr>
-                                <th data-key="">Descripton</th>
-                                <th data-key="">Value</th>
-                                <th data-key="">Unit</th>
-                            </tr>
-                            <tr>
-                                <td data-key="">Output resistor</td>
-                                <td id="sse_batt_resistor">-</td>
-                                <td class="unit">&#8486;</td>
-                            </tr>
-                            <tr>
-                                <td data-key="">Current error correction</td>
-                                <td id="sse_batt_i_errfactor">-</td>
-                                <td class="unit">A</td>
-                            </tr>
-                            <tr>
-                                <td data-key="">Over voltage threshold</td>
-                                <td id="sse_batt_v_over">-</td>
-                                <td class="unit">V</td>
-                            </tr>
+                        <tr>
+                            <th data-key="">Descripton</th>
+                            <th data-key="">Value</th>
+                            <th data-key="">Unit</th>
+                        </tr>
+                        <tr>
+                            <td data-key="">Charging set current</td>
+                            <td id="sse_batt_i_set">-</td>
+                            <td class="unit">A</td>
+                        </tr>
+                        <tr>
+                            <td data-key="">Charging set voltage</td>
+                            <td id="sse_batt_v_set">-</td>
+                            <td class="unit">V</td>
+                        </tr>
+                        <tr>
+                            <td data-key="">Charging set power</td>
+                            <td id="sse_batt_p_set">-</td>
+                            <td class="unit">kW</td>
+                        </tr>
                         </tbody>
                     </table>
 
-                    <box-layout id="sse_general_setting_box"><!-- TODO: hide"-->
+                    <box-layout>
                         <!----------------------->
                         <h3></h3>
                         <box-layout>
                             <form method="POST">
                                 <box-layout>
-                                    <label ><span data-key="Set output resistor">Set output resistor</span> [&#8486;]</label>
-                                    <input name="batt_resistor" class="right" type="number" min="0" max="10" step="0.001" placeholder="&#8486;" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                                    <label data-key="">Set battery charging current [A]</label>
+                                    <input name="batt_set_i" class="right" type="number" min="0" max="60" step="0.001"
+                                           placeholder="A" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
                                 </box-layout>
                                 <box-layout>
-                                    <label data-key="Set current error correction">Set current error correction [A]</label>
-                                    <input name="batt_i_errfactor" class="right" type="number" min="0" max="60" step="0.001" placeholder="A" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                                    <label data-key="">Set battery charging voltage [V]</label>
+                                    <input name="batt_set_v" class="right" type="number" min="0" max="60" step="0.001"
+                                           placeholder="V" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
                                 </box-layout>
-                                <box-layout>
-                                    <label data-key="Set over voltage threshold">Set over voltage threshold [V]</label>
-                                    <input name="batt_v_over" class="right" type="number" min="0" max="60" step="0.001" placeholder="V" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                                </box-layout>
-                                <button type="button" class="right" onclick="FormSubmit(this.form)" data-key="Set">Set</button>
+
+                                <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
                             </form>
                         </box-layout>
                     </box-layout>
                 </box-layout>
 
-                <!-- Temperature Threshold -->
-                <box-layout>
-                    <h2 data-key="Temperature Threshold">Temperature Threshold
-                        <info hide></info><info-box data-key="TODO: I am shown when someone hovers over the div above.">TODO: I am shown when someone hovers over the div above.</info-box>
-                    </h2>
+                <!----------------------->
+                <h3 data-key="">General parameter
+                    <info hide></info>
+                    <info-box data-key="">TODO: I am shown when someone hovers over the div above.</info-box>
+                </h3>
 
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="">Descripton</th>
+                        <th data-key="">Value</th>
+                        <th data-key="">Unit</th>
+                    </tr>
+                    <tr>
+                        <td data-key="">Output resistor</td>
+                        <td id="sse_batt_resistor">-</td>
+                        <td class="unit">&#8486;</td>
+                    </tr>
+                    <tr>
+                        <td data-key="">Current error correction</td>
+                        <td id="sse_batt_i_errfactor">-</td>
+                        <td class="unit">A</td>
+                    </tr>
+                    <tr>
+                        <td data-key="">Over voltage threshold</td>
+                        <td id="sse_batt_v_over">-</td>
+                        <td class="unit">V</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <box-layout id="sse_general_setting_box"><!-- TODO: hide"-->
                     <!----------------------->
-                    <table>
-                        <caption hide></caption>
-                        <tbody>
-                            <tr>
-                                <th data-key="Descripton">Descripton</th>
-                                <th data-key="Value">Value</th>
-                                <th data-key="Unit">Unit</th>
-                            </tr>
-                            <tr>
-                                <td data-key="IM-Pad error">IM-Pad error</td>
-                                <td id="sse_pad_temp_error">-</td>
-                                <td class="unit">&#176;C</td>
-                            </tr>
-                            <tr>
-                                <td data-key="IM-Pad warning">IM-Pad warning</td>
-                                <td id="sse_pad_temp_warning">-</td>
-                                <td class="unit">&#176;C</td>
-                            </tr>
-                            <tr>
-                                <td data-key="Heat-Sink error">Heat-Sink error</td>
-                                <td id="sse_hs_temp_error">-</td>
-                                <td class="unit">&#176;C</td>
-                            </tr>
-                            <tr>
-                                <td data-key="Heat-Sink warning">Heat-Sink warning</td>
-                                <td id="sse_hs_temp_warning">-</td>
-                                <td class="unit">&#176;C</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
                     <h3></h3>
                     <box-layout>
                         <form method="POST">
                             <box-layout>
-                                <label data-key="Set IM-Pad error">Set IM-Pad &#176;T error [&#176;C]</label>
-                                <input name="pad_temp_error" class="right" type="number" min="0" max="90"  placeholder="&#176;C" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                                <label><span data-key="Set output resistor">Set output resistor</span> [&#8486;]</label>
+                                <input name="batt_resistor" class="right" type="number" min="0" max="10" step="0.001"
+                                       placeholder="&#8486;" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
                             </box-layout>
                             <box-layout>
-                                <label data-key="Set IM-Pad warning">Set IM-Pad &#176;T warning [&#176;C]</label>
-                                <input name="pad_temp_warning" class="right" type="number" min="0" max="90" placeholder="&#176;C"
-                                    onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                                <label data-key="Set current error correction">Set current error correction [A]</label>
+                                <input name="batt_i_errfactor" class="right" type="number" min="0" max="60" step="0.001"
+                                       placeholder="A" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
                             </box-layout>
                             <box-layout>
-                                <label data-key="Set Heat-Sink error ">Set Heat-Sink &#176;T error [&#176;C]</label>
-                                <input name="hs_temp_error" class="right" type="number" min="0" max="90" placeholder="&#176;C" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                                <label data-key="Set over voltage threshold">Set over voltage threshold [V]</label>
+                                <input name="batt_v_over" class="right" type="number" min="0" max="60" step="0.001"
+                                       placeholder="V" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
                             </box-layout>
-                            <box-layout>
-                                <label data-key="Set Heat-Sink &#176;T warning">Set Heat-Sink &#176;T warning [&#176;C]</label>
-                                <input name="hs_temp_warning" class="right" type="number" min="0" max="90" placeholder="&#176;C"
-                                    onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <button type="button" class="right" onclick="FormSubmit(this.form)"data-key="Set">Set</button>
+                            <button type="button" class="right" onclick="FormSubmit(this.form)" data-key="Set">Set
+                            </button>
                         </form>
                     </box-layout>
                 </box-layout>
-            </col-layout>
+            </box-layout>
 
-            <!-- USER LOGOUT-->
-<!-- <div class="column-div" id="user-logout-box">
-    <h2>Logged In User <span id="active-usr"></span></h2>
-    <form id="logout-form" action="" method="POST" onsubmit="">
-        <span class="logout-form-text"> Logout <span class="beta">:</span></span>
-        <input class="submit-button-logout_right" name="UsrLogout" type="submit" value=&#10140;>
-    </form>
-    <div id="usr-check-out" hide>TODO</div>
-    <div class="more-distance"></div>
-</div> -->
+            <!-- Temperature Threshold -->
+            <box-layout>
+                <h2 data-key="Temperature Threshold">Temperature Threshold
+                    <info hide></info>
+                    <info-box data-key="TODO: I am shown when someone hovers over the div above.">TODO: I am shown when
+                        someone hovers over the div above.
+                    </info-box>
+                </h2>
 
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Descripton">Descripton</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td data-key="IM-Pad error">IM-Pad error</td>
+                        <td id="sse_pad_temp_error">-</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    <tr>
+                        <td data-key="IM-Pad warning">IM-Pad warning</td>
+                        <td id="sse_pad_temp_warning">-</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Heat-Sink error">Heat-Sink error</td>
+                        <td id="sse_hs_temp_error">-</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Heat-Sink warning">Heat-Sink warning</td>
+                        <td id="sse_hs_temp_warning">-</td>
+                        <td class="unit">&#176;C</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-<!-- MPU USER MANAGEMENT-->
-<!-- <div class="column-div">
-    <h2>User Management</h2>
-    <div>
-        <h3>Create New User</h3>
-        <form id="user-management-form" action="" method="POST">
-            <div>
-                <info></info>
-                <div class="hidden-info" id="user-info">TODO: I am shown when someone hovers over the div above.</div>
-            </div>
-
-            <div class="keep-more-distance">
-                <label>Username</label>
-                <input id="usr-name" name="usrName" type="text" size="16" maxlength="16" placeholder="username"> TODO
-            </div>
-            <div class="keep-more-distance">
-                <label>Password</label>
-                <input id="pswd-1" name="Pswd1" type="Password" size="16" maxlength="16" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-            </div>
-            <div class="keep-more-distance">
-                <label>Retype Password</label>
-                <input id="pswd-2" name="Pswd2" type="Password" size="16" maxlength="16" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-            </div>
-            <div class="keep-more-distance">
-                <label>User Rights</label>
-                <select name="usrRights">
-                    <option value="Administrator">Administrator</option>
-                    <option value="Standard">Standard</option>
-                </select>
-                <input class="submit-button_right" name="createUsr" type="submit" value="Create">
-            </div>
-        </form>
-        <h3>Remove User</h3>
-        <div id="user-remove-container">
-            <label>Select User</label>
-            <form id="user-remove-form" action="" method="POST">
-                <select name="usrToRemove">
-                    <option value="0">TODO</option>
-                    <option value="1">TODO</option>
-                    <option value="2">TODO</option>
-                    <option value="3">TODO</option>
-                    <option value="4">TODO</option>
-                </select>
-                <input class="submit-button_right" type="submit" name="removeUsr" value="Remove">
-            </form>
-        </div>
-    </div>
-
-    <div class="more-distance"></div>
-</div> -->
-            <!-- Column 2 -->
-            <col-layout>
-<!-- CAN INTERFACE CONFIGURATION-->
-<!-- TODO: fehlt noch -->
-<box id="sse_can_config_box" hide>
-    <h2 ><span data-key="CAN Configuration" > CAN Configuration</span>
-        <info hide></info>
-        <info-box>TODO: I am shown when someone hovers over the div above.</info-box>
-    </h2>
-
-    <div>
-        <h3 data-key="Actual Settings">Actual Settings</h3>
-        <table>
-            <th></th>
-            <tbody>
-                <tr>
-                    <td  > <span  data-key="MPU CAN ID" >MPU CAN ID</span> 1 <span class="highlight">:</span> Settings</td>
-                    <td>0x
-                        <!--#exec cgi="MPUcanid1"-->
-                    </td>
-                </tr>
-                <tr>
-                    <td>   <span  data-key="MPU CAN ID" >MPU CAN ID</span> 2<span class="highlight">:</span> <span data-key="Info">  Info</span></td>
-                    <td>0x
-                        <!--#exec cgi="MPUcanid2"-->
-                    </td>
-                </tr>
-                <tr>
-                    <td data-key="BMS CAN ID 1">BMS CAN ID 1 <span class="highlight">:</span> <span data-key="Status"> Status</span></td>
-                    <td>0x
-                        <!--#exec cgi="BMScanid1"-->
-                    </td>
-                </tr>
-                <tr>
-                    <td data-key="BMS CAN ID 2">BMS CAN ID 2 <span class="highlight">:</span></td>
-                    <td>0x
-                        <!--#exec cgi="BMScanid2"-->
-                    </td>
-                </tr>
-                <tr>
-                    <td data-key="CAN Baudrate">CAN Baudrate</td>
-                    <td>
-                        <!--#exec cgi="baudrate"--> kbit/s
-                    </td>
-                </tr>
-                <tr>
-                    <td data-key="CAN ID Format">CAN ID Format</td>
-                    <td>
-                        <!--#exec cgi="idformat"--> bits
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <h3 data-key="Edit CAN Settings">Edit CAN Settings</h3>
-        <form method="POST">
-            <label data-key="Edit MPU CAN ID 1">Edit MPU CAN ID 1</label>
-            <input name="MPUcanid1" type="text" size="10" maxlength="10" value="<!--#exec cgi=" MPUcanid1"-->"> hex
-            <label data-key="Edit MPU CAN ID 2">Edit MPU CAN ID 2</label>
-            <input name="MPUcanid2" type="text" size="10" maxlength="10" value="<!--#exec cgi=" MPUcanid2"-->"> hex
-            <label data-key="Edit BMS CAN ID 1">Edit BMS CAN ID 1</label>
-            <input name="BMScanid1" type="text" size="10" maxlength="10" value="<!--#exec cgi=" BMScanid1"-->"> hex
-            <label data-key="Edit BMS CAN ID 2">Edit BMS CAN ID 2</label>
-            <input name="BMScanid2" type="text" size="10" maxlength="10" value="<!--#exec cgi=" BMScanid2"-->"> hex
-            <label data-key=" Edit CAN Baudrate"> Edit CAN Baudrate</label>
-            <input name="baudrate" type="text" size="5" maxlength="3" value="<!--#exec cgi=" baudrate"-->"> kbit/s
-            <label data-key="Edit CAN ID Format">Edit CAN ID Format</label>
-            <select id="can-id-format" name="idformat">
-                <option id="onze" value="11">11</option>
-                <option id="deuxneuf" value="29">29</option>
-            </select>
-            &nbsp;bits
-
-            <button type="button" class="right" onclick="FormSubmit(this.form)" data-key="Set">Set</button>
-        </form>
-    </div>
-    <div class="more-distance"></div>
-</box>
-
-                <!-- Configuration-->
+                <h3></h3>
                 <box-layout>
-                    <h2 data-key="" data-key="Configuration">Configuration</h2>
-
-                    <!----------------------->
-                    <h3>Network
-                        <info></info>
-                        <info-box data-key="Network-relevant settings are only applied after a restart.">Network-relevant settings are only applied after a restart.</info-box>
-                    </h3>
                     <form method="POST">
                         <box-layout>
-                            <label data-key="DHCP">DHCP</label>
-                            <select id="sse_net_dhcp" name="net_dhcp" class="right" onchange="FormSubmit(this.form)">
-                                <option value="0" hide selected>-</option>
-                                <option value="1" data-key="Static">Static</option>
-                                <option value="2" data-key="Dynamic">Dynamic</option>
-                            </select>
+                            <label data-key="Set IM-Pad error">Set IM-Pad &#176;T error [&#176;C]</label>
+                            <input name="pad_temp_error" class="right" type="number" min="0" max="90"
+                                   placeholder="&#176;C" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="Set IM-Pad warning">Set IM-Pad &#176;T warning [&#176;C]</label>
+                            <input name="pad_temp_warning" class="right" type="number" min="0" max="90"
+                                   placeholder="&#176;C"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="Set Heat-Sink error ">Set Heat-Sink &#176;T error [&#176;C]</label>
+                            <input name="hs_temp_error" class="right" type="number" min="0" max="90"
+                                   placeholder="&#176;C" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="Set Heat-Sink &#176;T warning">Set Heat-Sink &#176;T warning
+                                [&#176;C]</label>
+                            <input name="hs_temp_warning" class="right" type="number" min="0" max="90"
+                                   placeholder="&#176;C"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <button type="button" class="right" onclick="FormSubmit(this.form)" data-key="Set">Set</button>
+                    </form>
+                </box-layout>
+            </box-layout>
+        </col-layout>
+
+        <!-- USER LOGOUT-->
+        <!-- <div class="column-div" id="user-logout-box">
+            <h2>Logged In User <span id="active-usr"></span></h2>
+            <form id="logout-form" action="" method="POST" onsubmit="">
+                <span class="logout-form-text"> Logout <span class="beta">:</span></span>
+                <input class="submit-button-logout_right" name="UsrLogout" type="submit" value=&#10140;>
+            </form>
+            <div id="usr-check-out" hide>TODO</div>
+            <div class="more-distance"></div>
+        </div> -->
+
+
+        <!-- MPU USER MANAGEMENT-->
+        <!-- <div class="column-div">
+            <h2>User Management</h2>
+            <div>
+                <h3>Create New User</h3>
+                <form id="user-management-form" action="" method="POST">
+                    <div>
+                        <info></info>
+                        <div class="hidden-info" id="user-info">TODO: I am shown when someone hovers over the div above.</div>
+                    </div>
+
+                    <div class="keep-more-distance">
+                        <label>Username</label>
+                        <input id="usr-name" name="usrName" type="text" size="16" maxlength="16" placeholder="username"> TODO
+                    </div>
+                    <div class="keep-more-distance">
+                        <label>Password</label>
+                        <input id="pswd-1" name="Pswd1" type="Password" size="16" maxlength="16" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+                    </div>
+                    <div class="keep-more-distance">
+                        <label>Retype Password</label>
+                        <input id="pswd-2" name="Pswd2" type="Password" size="16" maxlength="16" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+                    </div>
+                    <div class="keep-more-distance">
+                        <label>User Rights</label>
+                        <select name="usrRights">
+                            <option value="Administrator">Administrator</option>
+                            <option value="Standard">Standard</option>
+                        </select>
+                        <input class="submit-button_right" name="createUsr" type="submit" value="Create">
+                    </div>
+                </form>
+                <h3>Remove User</h3>
+                <div id="user-remove-container">
+                    <label>Select User</label>
+                    <form id="user-remove-form" action="" method="POST">
+                        <select name="usrToRemove">
+                            <option value="0">TODO</option>
+                            <option value="1">TODO</option>
+                            <option value="2">TODO</option>
+                            <option value="3">TODO</option>
+                            <option value="4">TODO</option>
+                        </select>
+                        <input class="submit-button_right" type="submit" name="removeUsr" value="Remove">
+                    </form>
+                </div>
+            </div>
+
+            <div class="more-distance"></div>
+        </div> -->
+        <!-- Column 2 -->
+        <col-layout>
+            <!-- CAN INTERFACE CONFIGURATION-->
+            <!-- TODO: fehlt noch -->
+            <box id="sse_can_config_box" hide>
+                <h2><span data-key="CAN Configuration"> CAN Configuration</span>
+                    <info hide></info>
+                    <info-box>TODO: I am shown when someone hovers over the div above.</info-box>
+                </h2>
+
+                <div>
+                    <h3 data-key="Actual Settings">Actual Settings</h3>
+                    <table>
+                        <th></th>
+                        <tbody>
+                        <tr>
+                            <td><span data-key="MPU CAN ID">MPU CAN ID</span> 1 <span class="highlight">:</span>
+                                Settings
+                            </td>
+                            <td>0x
+                                <!--#exec cgi="MPUcanid1"-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-key="MPU CAN ID">MPU CAN ID</span> 2<span class="highlight">:</span> <span
+                                    data-key="Info">  Info</span></td>
+                            <td>0x
+                                <!--#exec cgi="MPUcanid2"-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-key="BMS CAN ID 1">BMS CAN ID 1 <span class="highlight">:</span> <span
+                                    data-key="Status"> Status</span></td>
+                            <td>0x
+                                <!--#exec cgi="BMScanid1"-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-key="BMS CAN ID 2">BMS CAN ID 2 <span class="highlight">:</span></td>
+                            <td>0x
+                                <!--#exec cgi="BMScanid2"-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-key="CAN Baudrate">CAN Baudrate</td>
+                            <td>
+                                <!--#exec cgi="baudrate"--> kbit/s
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-key="CAN ID Format">CAN ID Format</td>
+                            <td>
+                                <!--#exec cgi="idformat"--> bits
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h3 data-key="Edit CAN Settings">Edit CAN Settings</h3>
+                    <form method="POST">
+                        <label data-key="Edit MPU CAN ID 1">Edit MPU CAN ID 1</label>
+                        <input name="MPUcanid1" type="text" size="10" maxlength="10" value="<!--#exec cgi=" MPUcanid1"-->">
+                        hex
+                        <label data-key="Edit MPU CAN ID 2">Edit MPU CAN ID 2</label>
+                        <input name="MPUcanid2" type="text" size="10" maxlength="10" value="<!--#exec cgi=" MPUcanid2"-->">
+                        hex
+                        <label data-key="Edit BMS CAN ID 1">Edit BMS CAN ID 1</label>
+                        <input name="BMScanid1" type="text" size="10" maxlength="10" value="<!--#exec cgi=" BMScanid1"-->">
+                        hex
+                        <label data-key="Edit BMS CAN ID 2">Edit BMS CAN ID 2</label>
+                        <input name="BMScanid2" type="text" size="10" maxlength="10" value="<!--#exec cgi=" BMScanid2"-->">
+                        hex
+                        <label data-key=" Edit CAN Baudrate"> Edit CAN Baudrate</label>
+                        <input name="baudrate" type="text" size="5" maxlength="3" value="<!--#exec cgi=" baudrate"-->">
+                        kbit/s
+                        <label data-key="Edit CAN ID Format">Edit CAN ID Format</label>
+                        <select id="can-id-format" name="idformat">
+                            <option id="onze" value="11">11</option>
+                            <option id="deuxneuf" value="29">29</option>
+                        </select>
+                        &nbsp;bits
+
+                        <button type="button" class="right" onclick="FormSubmit(this.form)" data-key="Set">Set</button>
+                    </form>
+                </div>
+                <div class="more-distance"></div>
+            </box>
+
+            <!-- Configuration-->
+            <box-layout>
+                <h2 data-key="" data-key="Configuration">Configuration</h2>
+
+                <!----------------------->
+                <h3>Network
+                    <info></info>
+                    <info-box data-key="Network-relevant settings are only applied after a restart.">Network-relevant
+                        settings are only applied after a restart.
+                    </info-box>
+                </h3>
+                <form method="POST">
+                    <box-layout>
+                        <label data-key="DHCP">DHCP</label>
+                        <select id="sse_net_dhcp" name="net_dhcp" class="right" onchange="FormSubmit(this.form)">
+                            <option value="0" hide selected>-</option>
+                            <option value="1" data-key="Static">Static</option>
+                            <option value="2" data-key="Dynamic">Dynamic</option>
+                        </select>
+                    </box-layout>
+                </form>
+
+                <!----------------------->
+                <h3></h3>
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Descripton">Descripton</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td data-key="IP address">IP address</td>
+                        <td id="sse_net_ip">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Subnet mask">Subnet mask</td>
+                        <td id="sse_net_mask">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Gateway">Gateway</td>
+                        <td id="sse_net_gw">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Hostname">Hostname
+                            <info></info>
+                            <info-box data-key="hostname-info-box">If the device is in the same subnet like the client,
+                                it can be reached using the MDNS service via the web address <em>http://#hostname#/</em>.
+                                This is also the case if no DNS server is present.
+                            </info-box>
+                        </td>
+                        <td id="sse_net_hostname">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="DNS server">DNS server</td>
+                        <td id="sse_net_dns">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3></h3>
+                <box-layout>
+                    <form method="POST">
+                        <box-layout>
+                            <label data-key="IP address">IP address</label>
+                            <input name="net_ip" class="right" type="text" size="20"
+                                   placeholder="___.___.___.___"
+                                   pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="Subnet mask">Subnet mask</label>
+                            <input name="net_mask" class="right" type="text" size="20"
+                                   placeholder="___.___.___.___"
+                                   pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="Gateway">>Gateway</label>
+                            <input name="net_gw" class="right" type="text" size="20"
+                                   placeholder="___.___.___.___"
+                                   pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="Hostname">Hostname</label>
+                            <info></info>
+                            <info-box data-key="Up to 63 characters according to">Up to 63 characters according to RFC
+                                1123.
+                            </info-box>
+                            <input name="net_hostname" class="right" type="text" size="20" maxlength="63"
+                                   placeholder="Up to 63 characters"
+                                   pattern="(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="DNS server">DNS server</label>
+                            <input name="net_dns" class="right" type="text" size="20"
+                                   placeholder="___.___.___.___"
+                                   pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
+                    </form>
+                </box-layout>
+
+                <!----------------------->
+                <h3 data-key="Ethernet Interface">Ethernet Interface
+                    <info></info>
+                    <info-box data-key="All 'PLC' and 'BMS & PLC' mode relevant settings only applied after a restart">
+                        All 'PLC' and 'BMS & PLC' mode relevant settings only applied after a restart.
+                    </info-box>
+                </h3>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Descripton">Descripton</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <tddata-key
+                        ="TCP MPU port">TCP MPU port</td>
+                        <td id="sse_tcp_lport">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="TCP Client port">TCP Client port
+                            <info></info>
+                            <info-box data-key="If port is set to 0, any port is accepted">If port is set to 0, any port
+                                is accepted.
+                            </info-box>
+                        </td>
+                        <td id="sse_tcp_fport">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="UDP MPU port">UDP MPU port</td>
+                        <td id="sse_udp_lport">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="UDP Client port">UDP Client port
+                            <info></info>
+                            <info-box data-key="If port is set to 0, any port is accepted.">If port is set to 0, any
+                                port is accepted.
+                            </info-box>
+                        </td>
+                        <td id="sse_udp_fport">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="RX timeout">RX timeout
+                            <info></info>
+                            <info-box
+                                    data-key="When this timeout expires, communication is considered lost. A value of 0ms means no timeout">
+                                When this timeout expires, communication is considered lost. A value of 0ms means no
+                                timeout.
+                            </info-box>
+                        </td>
+                        <td id="sse_tcp_udp_timeout">-</td>
+                        <td class="unit">ms</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3></h3>
+                <box-layout>
+                    <form method="POST">
+                        <box-layout>
+                            <label data-key="TCP MPU port">TCP MPU port</label>
+                            <input disabled name="tcp_lport" class="right" type="number" min="1" max="65535"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="TCP client port">TCP client port</label>
+                            <input disabled name="tcp_fport" class="right" type="number" min="0" max="65535"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="UDP MPU por">UDP MPU port</label>
+                            <input name="udp_lport" class="right" type="number" min="1" max="65535"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="UDP client port">UDP client port</label>
+                            <input name="udp_fport" class="right" type="number" min="0" max="65535"
+                                   onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="">RX timeout [ms]</label>
+                            <info></info>
+                            <info-box
+                                    data-key="When this timeout expires, communication is considered lost. A value of 0ms disables the timeout.">
+                                When this timeout expires, communication is considered lost. A value of 0ms disables the
+                                timeout.
+                            </info-box>
+                            <input name="tcp_udp_timeout" class="right" type="number" min="0" max="1000000000"
+                                   placeholder="ms" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <button type="button" class="right" onclick="FormSubmit(this.form)" data-key="Set">Set</button>
+                    </form>
+                </box-layout>
+
+                <!----------------------->
+                <h3 data-key="Can Interface">Can Interface
+                    <info></info>
+                    <info-box data-key="Some Can relevant settings only applied after a restart.">Some Can relevant
+                        settings only applied after a restart.
+                    </info-box>
+                </h3>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <tr>
+                        <th data-key="Descripton">Descripton</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
+                    </tr>
+                    <tr>
+                        <td data-key="Bitrate">Bitrate</td>
+                        <td id="sse_can_bitrate">-</td>
+                        <td class="unit">k bps</td>
+                    </tr>
+                    <tr>
+                        <td data-key="RX timeout">RX timeout
+                            <info></info>
+                            <info-box data-key="">When this timeout expires, communication is considered lost. Timeout
+                                only defined for 'Can' mode and a value of 0ms means no timeout.
+                            </info-box>
+                        </td>
+                        <td id="sse_can_timeout">-</td>
+                        <td class="unit">ms</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3></h3>
+                <box-layout>
+                    <form method="POST">
+                        <box-layout>
+                            <label data-key="Bitrate">Bitrate [k bps]</label>
+                            <input name="can_bitrate" class="right" type="number" min="125" max="1000"
+                                   placeholder="k bps" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <box-layout>
+                            <label data-key="RX timeout [ms]">RX timeout [ms]</label>
+                            <info></info>
+                            <info-box
+                                    data-key="When this timeout expires, communication is considered lost. Timeout only defined for 'Can' mode and A value of 0ms disables the timeout.">
+                                When this timeout expires, communication is considered lost. Timeout only defined for
+                                'Can' mode and A value of 0ms disables the timeout.
+                            </info-box>
+                            <input name="can_timeout" class="right" type="number" min="0" max="1000000000"
+                                   placeholder="ms" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
+                        </box-layout>
+                        <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
+                    </form>
+                </box-layout>
+            </box-layout>
+        </col-layout>
+
+        <!-- IO TEST-->
+        <!-- <div class="column-div" id="io-test-box">
+            <h2>MPU I/O Test</h2>
+            <div id="over-v-io-test">
+                <h3>Over Voltage Protection Test</h3>
+                <div style="margin: 0px 0px 13px 10px;">
+                    <div class="information">
+                        <info></info>
+                    </div>
+                    <div class="hidden-info">I am shown when someone hovers over the div above.</div>
+                </div>
+                <span class="over-v-io-test-text">Battery Over Voltage Simulation <wide>:</wide></span>
+                <div class="over-v-io">
+                    <div class="over-v-io-selection">
+                        <span id="over-v-io-selection-text">TODO</span>
+                        <span id="over-v-io-selection-arrow">&#9662;</span>
+                    </div>
+                    <div class="over-v-io-content">
+                        <form action="" target="" method="POST">
+                            <input type="submit" name="OverVSim" class="over-v-io-select" id="o-v-on" value="ON">
+                        </form>
+                        <form action="" target="" method="POST">
+                            <input type="submit" name="OverVSim" class="over-v-io-select" id="o-v-off" value="OFF">
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+        <!-- <div id="pwm-signals">
+            <h3>PWM Signals Test</h3>
+            <table class="pwm-signals-table">
+                <tbody>
+                    <tr>
+                        <td>10 kHz Data Signal duty-cycle</td>
+                        <td id="pwm-10khz-duty">0 %</td>
+                    </tr>
+                    <tr>
+                        <td>Carrier Signal duty-cycle</td>
+                        <td> TODO: carrierDuty %</td>
+                    </tr>
+                    <tr>
+                        <td>Carrier Signal Frequency</td>
+                        <td id="carrier-freq">0 kHz</td>
+                    </tr>
+                    <tr>
+                        <td>1 kHz FAN Signal duty-cycle</td>
+                        <td> TODO: 1khzFanDuty %</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+        <!-- <form class="pwm-signals-form" action="" method="POST">
+            <p>
+                <div class="information">
+                    <info></info>
+                </div>
+                <div class="hidden-info">I am shown when someone hovers over the div above.</div>
+            </p>
+            <p>
+                <span class="pwm-signals-form-text"> Set 10 kHz Signal Duty-cycle <wide>:</wide></span>
+                <input id="pwm-10khz-duty-input" name="10khzDuty" type="text" size="10" maxlength="3" value="TODO: 10khzDuty"> %
+                <input class="submit-button_right" type="submit" value="Submit">
+            </p>
+        </form>
+        <form class="pwm-signals-form" action="" method="POST">
+            <span class="pwm-signals-form-text"> Set Carrier Signal Duty-cycle <wide>:</wide></span>
+            <input id="carrier-duty-input" name="carrierDuty" type="text" size="10" maxlength="3" value="TODO: carrierDuty"> %
+            <input class="submit-button_right" type="submit" value="Submit">
+        </form>
+        <form class="pwm-signals-form" action="" method="POST">
+            <span class="pwm-signals-form-text"> Set Carrier Signal Frequency <wide>:</wide></span>
+            <input id="carrier-freq-input" name="carrierFreq" type="text" size="10" maxlength="4" value="TODO: carrierFreq"> kHz
+            <input class="submit-button_right" type="submit" value="Submit">
+        </form>
+        <form class="pwm-signals-form" action="" method="POST">
+            <span class="pwm-signals-form-text"> Set 1kHz FAN Signal Duty-cycle <wide>:</wide></span>
+            <input name="1khzFanDuty" type="text" size="10" maxlength="3" value="TODO: 1khzFanDuty"> %
+            <input class="submit-button_right" type="submit" value="Submit">
+        </form>
+        <div class="more-distance"></div>
+        </div> -->
+
+        <!-- Column 3 -->
+        <col-layout>
+            <!-- Real Time Clock -->
+            <box-layout>
+                <h2 data-key="RTC: Real Time Clock">RTC: Real Time Clock</h2>
+
+                <!----------------------->
+                <table>
+                    <caption hide></caption>
+                    <tbody>
+                    <th hide></th>
+                    <tr>
+                        <td><span data-key="Year">Year</span> <span class="highlight">:</span> <span
+                                id="sse_rtc_year">-</span></td>
+                        <td><span data-key="Month">Month</span> <span class="highlight">:</span> <span
+                                id="sse_rtc_month">-</span></td>
+                        <td><span data-key="Day">Day</span> <span class="highlight">:</span> <span
+                                id="sse_rtc_day">-</span></td>
+                        <td><span data-key="Hour">Hour</span> <span class="highlight">:</span> <span
+                                id="sse_rtc_hour">-</span></td>
+                        <td><span data-key="Min">Min</span> <span class="highlight">:</span> <span
+                                id="sse_rtc_min">-</span></td>
+                        <td><span data-key="Sec">Sec</span> <span class="highlight">:</span> <span
+                                id="sse_rtc_sec">-</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3></h3>
+                <box-layout>
+                    <form method="POST">
+                        <box-layout>
+                            <label data-key="New RTC date & time">New RTC date & time</label>
+                            <input name="rtc" class="right" type="datetime-local"
+                                   pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}">
+                        </box-layout>
+                        <box-layout>
+                            <button type="button" class="right"
+                                    onclick="const date = new Date((Date.now() + new Date().getTimezoneOffset() * -60 * 1000)).toISOString().slice(0, 16); rtc.value = date;">
+                                Now
+                            </button>
+                        </box-layout>
+                        <box-layout>
+                            <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
                         </box-layout>
                     </form>
-
-                    <!----------------------->
-                    <h3></h3>
-                    <table>
-                        <caption hide></caption>
-                        <tbody>
-                            <tr>
-                                <th data-key="Descripton">Descripton</th>
-                                <th data-key="Value">Value</th>
-                                <th data-key="Unit">Unit</th>
-                            </tr>
-                            <tr>
-                                <td data-key="IP address">IP address</td>
-                                <td id="sse_net_ip">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="Subnet mask">Subnet mask</td>
-                                <td id="sse_net_mask">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="Gateway">Gateway</td>
-                                <td id="sse_net_gw">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="Hostname">Hostname
-                                    <info></info>
-                                    <info-box data-key="hostname-info-box">If the device is in the same subnet like the client, it can be reached using the MDNS service via the web address <em>http://#hostname#/</em>. This is also the case if no DNS server is present.</info-box></td>
-                                <td id="sse_net_hostname">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="DNS server">DNS server</td>
-                                <td id="sse_net_dns">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3></h3>
-                    <box-layout>
-                        <form method="POST">
-                            <box-layout>
-                                <label data-key="IP address">IP address</label>
-                                <input name="net_ip" class="right" type="text" size="20"
-                                placeholder="___.___.___.___" pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="Subnet mask">Subnet mask</label>
-                                <input name="net_mask" class="right" type="text" size="20"
-                                placeholder="___.___.___.___" pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="Gateway">>Gateway</label>
-                                <input name="net_gw" class="right" type="text" size="20"
-                                placeholder="___.___.___.___" pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="Hostname">Hostname</label>
-                                <info></info><info-box data-key="Up to 63 characters according to">Up to 63 characters according to RFC 1123.</info-box>
-                                <input name="net_hostname" class="right" type="text" size="20" maxlength="63"
-                                placeholder="Up to 63 characters" pattern="(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="DNS server">DNS server</label>
-                                <input name="net_dns" class="right" type="text" size="20"
-                                placeholder="___.___.___.___" pattern="([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
-                        </form>
-                    </box-layout>
-
-                    <!----------------------->
-                    <h3 data-key="Ethernet Interface">Ethernet Interface
-                        <info></info>
-                        <info-box data-key="All 'PLC' and 'BMS & PLC' mode relevant settings only applied after a restart">All 'PLC' and 'BMS & PLC' mode relevant settings only applied after a restart.</info-box>
-                    </h3>
-
-                    <!----------------------->
-                    <table>
-                        <caption hide></caption>
-                        <tbody>
-                            <tr>
-                                <th data-key="Descripton">Descripton</th>
-                                <th data-key="Value">Value</th>
-                                <th data-key="Unit">Unit</th>
-                            </tr>
-                            <tr>
-                                <tddata-key="TCP MPU port">TCP MPU port</td>
-                                <td id="sse_tcp_lport">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="TCP Client port">TCP Client port <info></info>
-                                <info-box data-key="If port is set to 0, any port is accepted">If port is set to 0, any port is accepted.</info-box></td>
-                                <td id="sse_tcp_fport">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="UDP MPU port">UDP MPU port</td>
-                                <td id="sse_udp_lport">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="UDP Client port">UDP Client port<info></info>
-                                <info-box data-key="If port is set to 0, any port is accepted.">If port is set to 0, any port is accepted.</info-box></td>
-                                <td id="sse_udp_fport">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="RX timeout">RX timeout <info></info>
-                                <info-box data-key="When this timeout expires, communication is considered lost. A value of 0ms means no timeout">When this timeout expires, communication is considered lost. A value of 0ms means no timeout.</info-box></td>
-                                <td id="sse_tcp_udp_timeout">-</td>
-                                <td class="unit">ms</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3></h3>
-                    <box-layout>
-                        <form method="POST">
-                            <box-layout>
-                                <label data-key="TCP MPU port">TCP MPU port</label>
-                                <input disabled name="tcp_lport" class="right" type="number" min="1" max="65535" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="TCP client port">TCP client port</label>
-                                <input disabled name="tcp_fport" class="right" type="number" min="0" max="65535" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="UDP MPU por">UDP MPU port</label>
-                                <input name="udp_lport" class="right" type="number" min="1" max="65535" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="UDP client port">UDP client port</label>
-                                <input name="udp_fport" class="right" type="number" min="0" max="65535" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="">RX timeout [ms]</label>
-                                <info></info>
-                                <info-box data-key="When this timeout expires, communication is considered lost. A value of 0ms disables the timeout.">When this timeout expires, communication is considered lost. A value of 0ms disables the timeout.</info-box>
-                                <input name="tcp_udp_timeout" class="right" type="number" min="0" max="1000000000" placeholder="ms" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <button type="button" class="right" onclick="FormSubmit(this.form)" data-key="Set">Set</button>
-                        </form>
-                    </box-layout>
-
-                    <!----------------------->
-                    <h3 data-key="Can Interface">Can Interface
-                        <info></info>
-                        <info-box data-key="Some Can relevant settings only applied after a restart.">Some Can relevant settings only applied after a restart.</info-box>
-                    </h3>
-
-                    <!----------------------->
-                    <table>
-                        <caption hide></caption>
-                        <tbody>
-                            <tr>
-                                <th data-key="Descripton">Descripton</th>
-                                <th data-key="Value">Value</th>
-                                <th data-key="Unit">Unit</th>
-                            </tr>
-                            <tr>
-                                <td data-key="Bitrate">Bitrate</td>
-                                <td id="sse_can_bitrate">-</td>
-                                <td class="unit">k bps</td>
-                            </tr>
-                            <tr>
-                                <td data-key="RX timeout">RX timeout <info></info>
-                                <info-box data-key="">When this timeout expires, communication is considered lost. Timeout only defined for 'Can' mode and a value of 0ms means no timeout.</info-box></td>
-                                <td id="sse_can_timeout">-</td>
-                                <td class="unit">ms</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3></h3>
-                    <box-layout>
-                        <form method="POST">
-                            <box-layout>
-                                <label data-key="Bitrate">Bitrate [k bps]</label>
-                                <input name="can_bitrate" class="right" type="number" min="125" max="1000" placeholder="k bps" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <box-layout>
-                                <label data-key="RX timeout [ms]">RX timeout [ms]</label>
-                                <info></info>
-                                <info-box data-key="When this timeout expires, communication is considered lost. Timeout only defined for 'Can' mode and A value of 0ms disables the timeout.">When this timeout expires, communication is considered lost. Timeout only defined for 'Can' mode and A value of 0ms disables the timeout.</info-box>
-                                <input name="can_timeout" class="right" type="number" min="0" max="1000000000" placeholder="ms" onkeydown="if (event.keyCode==13) FormSubmit(this.form)">
-                            </box-layout>
-                            <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
-                        </form>
-                    </box-layout>
                 </box-layout>
-            </col-layout>
+            </box-layout>
 
-<!-- IO TEST-->
-<!-- <div class="column-div" id="io-test-box">
-    <h2>MPU I/O Test</h2>
-    <div id="over-v-io-test">
-        <h3>Over Voltage Protection Test</h3>
-        <div style="margin: 0px 0px 13px 10px;">
-            <div class="information">
-                <info></info>
-            </div>
-            <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-        </div>
-        <span class="over-v-io-test-text">Battery Over Voltage Simulation <wide>:</wide></span>
-        <div class="over-v-io">
-            <div class="over-v-io-selection">
-                <span id="over-v-io-selection-text">TODO</span>
-                <span id="over-v-io-selection-arrow">&#9662;</span>
-            </div>
-            <div class="over-v-io-content">
-                <form action="" target="" method="POST">
-                    <input type="submit" name="OverVSim" class="over-v-io-select" id="o-v-on" value="ON">
-                </form>
-                <form action="" target="" method="POST">
-                    <input type="submit" name="OverVSim" class="over-v-io-select" id="o-v-off" value="OFF">
-                </form>
-            </div>
-        </div>
-    </div> -->
-<!-- <div id="pwm-signals">
-    <h3>PWM Signals Test</h3>
-    <table class="pwm-signals-table">
-        <tbody>
-            <tr>
-                <td>10 kHz Data Signal duty-cycle</td>
-                <td id="pwm-10khz-duty">0 %</td>
-            </tr>
-            <tr>
-                <td>Carrier Signal duty-cycle</td>
-                <td> TODO: carrierDuty %</td>
-            </tr>
-            <tr>
-                <td>Carrier Signal Frequency</td>
-                <td id="carrier-freq">0 kHz</td>
-            </tr>
-            <tr>
-                <td>1 kHz FAN Signal duty-cycle</td>
-                <td> TODO: 1khzFanDuty %</td>
-            </tr>
-        </tbody>
-    </table>
-</div> -->
-<!-- <form class="pwm-signals-form" action="" method="POST">
-    <p>
-        <div class="information">
-            <info></info>
-        </div>
-        <div class="hidden-info">I am shown when someone hovers over the div above.</div>
-    </p>
-    <p>
-        <span class="pwm-signals-form-text"> Set 10 kHz Signal Duty-cycle <wide>:</wide></span>
-        <input id="pwm-10khz-duty-input" name="10khzDuty" type="text" size="10" maxlength="3" value="TODO: 10khzDuty"> %
-        <input class="submit-button_right" type="submit" value="Submit">
-    </p>
-</form>
-<form class="pwm-signals-form" action="" method="POST">
-    <span class="pwm-signals-form-text"> Set Carrier Signal Duty-cycle <wide>:</wide></span>
-    <input id="carrier-duty-input" name="carrierDuty" type="text" size="10" maxlength="3" value="TODO: carrierDuty"> %
-    <input class="submit-button_right" type="submit" value="Submit">
-</form>
-<form class="pwm-signals-form" action="" method="POST">
-    <span class="pwm-signals-form-text"> Set Carrier Signal Frequency <wide>:</wide></span>
-    <input id="carrier-freq-input" name="carrierFreq" type="text" size="10" maxlength="4" value="TODO: carrierFreq"> kHz
-    <input class="submit-button_right" type="submit" value="Submit">
-</form>
-<form class="pwm-signals-form" action="" method="POST">
-    <span class="pwm-signals-form-text"> Set 1kHz FAN Signal Duty-cycle <wide>:</wide></span>
-    <input name="1khzFanDuty" type="text" size="10" maxlength="3" value="TODO: 1khzFanDuty"> %
-    <input class="submit-button_right" type="submit" value="Submit">
-</form>
-<div class="more-distance"></div>
-</div> -->
-
-            <!-- Column 3 -->
-            <col-layout>
-                <!-- Real Time Clock -->
-                <box-layout>
-                    <h2 data-key="RTC: Real Time Clock">RTC: Real Time Clock</h2>
-
-                    <!----------------------->
-                    <table>
-                        <caption hide></caption>
-                        <tbody>
-                            <th hide></th>
-                             <tr>
-                        <td ><span data-key="Year">Year</span> <span class="highlight">:</span> <span id="sse_rtc_year">-</span></td>
-                        <td><span data-key="Month">Month</span> <span class="highlight">:</span> <span id="sse_rtc_month">-</span></td>
-                        <td><span data-key="Day">Day</span> <span class="highlight">:</span> <span id="sse_rtc_day">-</span></td>
-                        <td><span data-key="Hour">Hour</span> <span class="highlight">:</span> <span id="sse_rtc_hour">-</span></td>
-                        <td><span data-key="Min">Min</span> <span class="highlight">:</span> <span id="sse_rtc_min">-</span></td>
-                        <td><span data-key="Sec">Sec</span> <span class="highlight">:</span> <span id="sse_rtc_sec">-</span></td>
+            <!-- Product Information -->
+            <box-layout>
+                <h2 data-key="Product Information">Product Information</h2>
+                <!----------------------->
+                <h3></h3>
+                <table>
+                    <tbody>
+                    <tr>
+                        <th data-key="Descripton">Descripton</th>
+                        <th data-key="Value">Value</th>
+                        <th data-key="Unit">Unit</th>
                     </tr>
-                        </tbody>
-                    </table>
+                    <tr>
+                        <td data-key="">Serial number</td>
+                        <td id="sse_prod_serialnr">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Name">Name</td>
+                        <td id="sse_prod_name">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="ID">ID</td>
+                        <td id="sse_prod_wnr">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="Production date">Production date</td>
+                        <td id="sse_prod_date">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    <tr>
+                        <td data-key="AC address">MAC address</td>
+                        <td id="sse_net_mac">-</td>
+                        <td class="unit">-</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </box-layout>
 
-                    <h3></h3>
-                    <box-layout>
-                        <form method="POST">
-                            <box-layout>
-                                <label data-key="New RTC date & time">New RTC date & time</label>
-                                <input name="rtc" class="right" type="datetime-local"
-                                    pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}">
-                            </box-layout>
-                            <box-layout>
-                                <button type="button" class="right"
-                                    onclick="const date = new Date((Date.now() + new Date().getTimezoneOffset() * -60 * 1000)).toISOString().slice(0, 16); rtc.value = date;">Now</button>
-                            </box-layout>
-                            <box-layout>
-                                <button type="button" class="right" onclick="FormSubmit(this.form)">Set</button>
-                            </box-layout>
-                        </form>
-                    </box-layout>
-                </box-layout>
+            <!-- Firmeware restart -->
+            <box-layout>
+                <h2 data-key="Firmware Restart">Firmware Restart</h2>
 
-                <!-- Product Information -->
+                <!----------------------->
+                <h3></h3>
                 <box-layout>
-                    <h2 data-key="Product Information">Product Information</h2>
-                    <!----------------------->
-                    <h3></h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th data-key="Descripton">Descripton</th>
-                                <th data-key="Value">Value</th>
-                                <th data-key="Unit">Unit</th>
-                            </tr>
-                            <tr>
-                                <td data-key="">Serial number</td>
-                                <td id="sse_prod_serialnr">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="Name">Name</td>
-                                <td id="sse_prod_name">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="ID">ID</td>
-                                <td id="sse_prod_wnr">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="Production date">Production date</td>
-                                <td id="sse_prod_date">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                            <tr>
-                                <td data-key="AC address">MAC address</td>
-                                <td id="sse_net_mac">-</td>
-                                <td class="unit">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <form action="reboot.cgi" method="POST">
+                        <label data-key="Restart firmeware">Restart firmeware</label>
+                        <input type="submit" value="Restart" name="restart" type="button" class="right">
+                    </form>
                 </box-layout>
+            </box-layout>
 
-                <!-- Firmeware restart -->
+            <!-- Firmeware Update -->
+            <box-layout>
+                <h2 data-key="Firmware Update">Firmware Update
+                    <info></info>
+                    <info-box data-key="firmware-update-info-box">Firmware update is managed by bootloader. Press the
+                        'Reboot' button to switch to
+                        bootloader mode. This restarts the CPU. It may take a few seconds before the
+                        bootloader can then be reached via its static IP <em>192.168.1.100</em>. The bootloader stays
+                        active
+                        for ~5 min. If valid firmware is available after this time, it will be booted.
+                    </info-box>
+                </h2>
+
+                <!----------------------->
+                <h3></h3>
                 <box-layout>
-                    <h2 data-key="Firmware Restart">Firmware Restart</h2>
-
-                    <!----------------------->
-                    <h3></h3>
-                    <box-layout>
-                        <form action="reboot.cgi" method="POST">
-                            <label data-key="Restart firmeware">Restart firmeware</label>
-                            <input type="submit" value="Restart" name="restart" type="button" class="right">
-                        </form>
-                    </box-layout>
+                    <form action="reboot_bl.cgi" method="POST">
+                        <label data-key="Enter bootloader mode">Enter bootloader mode</label>
+                        <input type="submit" value="Reboot" name="reboot" type="button" class="right">
+                    </form>
                 </box-layout>
+            </box-layout>
 
-                <!-- Firmeware Update -->
+            <!-- Factory Reset -->
+            <box-layout>
+                <h2 data-key="Factory Reset">Factory Reset</h2>
+
+                <h3></h3>
                 <box-layout>
-                    <h2 data-key="Firmware Update">Firmware Update
-                        <info></info>
-                        <info-box data-key="firmware-update-info-box">Firmware update is managed by bootloader. Press the 'Reboot' button to switch to
-                            bootloader mode. This restarts the CPU. It may take a few seconds before the
-                            bootloader can then be reached via its static IP <em>192.168.1.100</em>. The bootloader stays active
-                            for ~5 min. If valid firmware is available after this time, it will be booted.
-                        </info-box>
-                    </h2>
-
-                    <!----------------------->
-                    <h3></h3>
-                    <box-layout>
-                        <form action="reboot_bl.cgi" method="POST">
-                            <label data-key="Enter bootloader mode">Enter bootloader mode</label>
-                            <input type="submit" value="Reboot" name="reboot" type="button" class="right">
-                        </form>
-                    </box-layout>
+                    <form method="POST">
+                        <label data-key="Reset config to factory values">Reset config to factory values</label>
+                        <button name="factory_reset" type="button" class="right" onclick="FormSubmit(this.form)">Reset
+                        </button>
+                    </form>
                 </box-layout>
+            </box-layout>
 
-                <!-- Factory Reset -->
+            <!-- Configuration File-->
+            <box-layout>
+                <h2>Configuration File
+                    <info hide></info>
+                    <info-box>TODO: I am shown when someone hovers over the div above.</info-box>
+                </h2>
+
+                <!----------------------->
                 <box-layout>
-                    <h2 data-key="Factory Reset">Factory Reset</h2>
-
-                    <h3></h3>
-                    <box-layout>
-                        <form method="POST">
-                            <label data-key="Reset config to factory values">Reset config to factory values</label>
-                            <button name="factory_reset" type="button" class="right" onclick="FormSubmit(this.form)">Reset</button>
-                        </form>
-                    </box-layout>
+                    <form method="POST">
+                        <!--<label>Choose an MPU configuration file</label>-->
+                        <input type="file" accept=".json" id="configuration_file">
+                        <button type="button" class="right" value="upload" onclick="settingImport()">Upload</button>
+                    </form>
                 </box-layout>
 
-                <!-- Configuration File-->
                 <box-layout>
-                  <h2>Configuration File
-                         <info hide></info>
-                         <info-box>TODO: I am shown when someone hovers over the div above.</info-box>
-                     </h2>
-
-                    <!----------------------->
-                    <box-layout>
-                        <form method="POST">
-                            <!--<label>Choose an MPU configuration file</label>-->
-                            <input type="file" accept=".json" id="configuration_file">
-                            <button type="button" class="right" value="upload" onclick="settingImport()" >Upload</button>
-                        </form>
-                    </box-layout>
-
-                    <box-layout>
-                        <form method="POST">
-                            <!--<<label> Download MPU Configuration File</label>-->
-                            <button type="button" class="right" value="download" onclick="settingDownload()" >Download</button>
-                        </form>
-                    </box-layout>
-
-                    <box-layout>
-                        <textarea id="config_file" rows="10" cols="200" readonly disabled></textarea>
-                    </box-layout>
+                    <form method="POST">
+                        <!--<<label> Download MPU Configuration File</label>-->
+                        <button type="button" class="right" value="download" onclick="settingDownload()">Download
+                        </button>
+                    </form>
                 </box-layout>
 
-            </col-layout>
-        </row-layout>
-    </content>
+                <box-layout>
+                    <textarea id="config_file" rows="10" cols="200" readonly disabled></textarea>
+                </box-layout>
+            </box-layout>
 
-    <!-- Footer -->
-    <footer>
-        <row>
-            <p class="copyright">
-                &copy;&nbsp;2022&nbsp;<a class="link" href="https://www.conductix.com/en">Conductix-Wampfler Automation GmbH</a>
-            </p>
-        </row>
-    </footer>
+        </col-layout>
+    </row-layout>
+</content>
+
+<!-- Footer -->
+<footer>
+    <row>
+        <p class="copyright">
+            &copy;&nbsp;2022&nbsp;<a class="link" href="https://www.conductix.com/en">Conductix-Wampfler Automation
+            GmbH</a>
+        </p>
+    </row>
+</footer>
 </body>
 
 </html>
